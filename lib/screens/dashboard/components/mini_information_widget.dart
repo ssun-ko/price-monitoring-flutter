@@ -1,5 +1,5 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/models/daily_info_model.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/models/daily_info_model.dart';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';

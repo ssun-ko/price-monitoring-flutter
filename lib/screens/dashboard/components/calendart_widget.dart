@@ -1,6 +1,6 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/core/models/data.dart';
-import 'package:price_monitoring/screens/dashboard/components/calendar_list_widget.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/core/models/data.dart';
+import 'package:price/screens/dashboard/components/calendar_list_widget.dart';
 
 import 'package:flutter/material.dart';
 

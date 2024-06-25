@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kgc.price_monitoring.flutter">
+    package="com.kgc.price.flutter">
    <application
         android:label="원자재 가격 모니터링"
         android:icon="@mipmap/ic_launcher">

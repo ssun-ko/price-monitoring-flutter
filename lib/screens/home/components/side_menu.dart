@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/providers/menu_provider.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/providers/menu_provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({

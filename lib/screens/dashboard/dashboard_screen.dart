@@ -1,8 +1,8 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/responsive.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/responsive.dart';
 
-import 'package:price_monitoring/screens/dashboard/components/recent_forums.dart';
-import 'package:price_monitoring/screens/dashboard/components/user_details_widget.dart';
+import 'package:price/screens/dashboard/components/recent_forums.dart';
+import 'package:price/screens/dashboard/components/user_details_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'components/header.dart';

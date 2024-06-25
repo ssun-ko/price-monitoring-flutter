@@ -1,7 +1,7 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/providers/drawer_provider.dart';
-import 'package:price_monitoring/providers/menu_provider.dart';
-import 'package:price_monitoring/screens/home/home_screen.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/providers/drawer_provider.dart';
+import 'package:price/providers/menu_provider.dart';
+import 'package:price/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

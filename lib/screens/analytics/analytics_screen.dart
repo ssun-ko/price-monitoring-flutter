@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/screens/dashboard/components/header.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/screens/dashboard/components/header.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   @override

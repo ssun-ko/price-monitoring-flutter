@@ -1,6 +1,6 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/core/utils/colorful_tag.dart';
-import 'package:price_monitoring/models/recent_user_model.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/core/utils/colorful_tag.dart';
+import 'package:price/models/recent_user_model.dart';
 import 'package:flutter/material.dart';
 
 class RecentDiscussions extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:price_monitoring/core/models/data.dart';
-import 'package:price_monitoring/core/widgets/wrapper.dart';
-import 'package:price_monitoring/screens/dashboard/components/list_calendar_data.dart';
+import 'package:price/core/models/data.dart';
+import 'package:price/core/widgets/wrapper.dart';
+import 'package:price/screens/dashboard/components/list_calendar_data.dart';
 
 import 'package:flutter/material.dart';
 

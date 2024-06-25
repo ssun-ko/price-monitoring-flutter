@@ -1,7 +1,7 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/screens/dashboard/components/calendart_widget.dart';
-import 'package:price_monitoring/screens/dashboard/components/charts.dart';
-import 'package:price_monitoring/screens/dashboard/components/user_details_mini_card.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/screens/dashboard/components/calendart_widget.dart';
+import 'package:price/screens/dashboard/components/charts.dart';
+import 'package:price/screens/dashboard/components/user_details_mini_card.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailsWidget extends StatelessWidget {

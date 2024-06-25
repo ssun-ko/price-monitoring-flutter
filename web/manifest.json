@@ -1,6 +1,6 @@
 {
-    "name": "price_monitoring",
-    "short_name": "price_monitoring",
+    "name": "price",
+    "short_name": "price",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

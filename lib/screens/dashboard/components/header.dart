@@ -1,5 +1,5 @@
-import 'package:price_monitoring/providers/drawer_provider.dart';
-import 'package:price_monitoring/responsive.dart';
+import 'package:price/providers/drawer_provider.dart';
+import 'package:price/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

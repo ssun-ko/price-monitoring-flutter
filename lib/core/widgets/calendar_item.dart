@@ -1,7 +1,7 @@
-import 'package:price_monitoring/core/constants/color_constants.dart';
-import 'package:price_monitoring/core/models/data.dart';
+import 'package:price/core/constants/color_constants.dart';
+import 'package:price/core/models/data.dart';
 
-import 'package:price_monitoring/core/utils/colorful_tag.dart';
+import 'package:price/core/utils/colorful_tag.dart';
 import 'package:colorize_text_avatar/colorize_text_avatar.dart';
 
 import 'package:flutter/material.dart';

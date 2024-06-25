@@ -1,4 +1,4 @@
-package com.kgc.price_monitoring.flutter
+package com.kgc.price.flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

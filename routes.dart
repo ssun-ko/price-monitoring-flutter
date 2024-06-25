@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:price_monitoring/screens/home/home_screen.dart';
+import 'package:price/screens/home/home_screen.dart';
 
 class Routes {
   Routes._();

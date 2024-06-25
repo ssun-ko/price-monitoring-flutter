@@ -1,9 +1,9 @@
-import 'package:price_monitoring/providers/drawer_provider.dart';
+import 'package:price/providers/drawer_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:price_monitoring/providers/menu_provider.dart';
-import 'package:price_monitoring/responsive.dart';
-import 'package:price_monitoring/screens/analytics/analytics_screen.dart';
-import 'package:price_monitoring/screens/dashboard/dashboard_screen.dart';
+import 'package:price/providers/menu_provider.dart';
+import 'package:price/responsive.dart';
+import 'package:price/screens/analytics/analytics_screen.dart';
+import 'package:price/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'components/side_menu.dart';
