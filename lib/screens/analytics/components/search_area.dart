@@ -30,7 +30,7 @@ class _SearchAreaState extends State<SearchArea> {
                     onSecondary: Colors.white,
                     error: Colors.red,
                     onError: Colors.white,
-                    surface: bgColor,
+                    surface: secondaryColor,
                     onSurface: Colors.white)),
             child: child!,
           );
@@ -61,7 +61,7 @@ class _SearchAreaState extends State<SearchArea> {
                     onSecondary: Colors.white,
                     error: Colors.red,
                     onError: Colors.white,
-                    surface: bgColor,
+                    surface: secondaryColor,
                     onSurface: Colors.white)),
             child: child!,
           );
