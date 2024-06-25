@@ -19,6 +19,21 @@ class _SearchAreaState extends State<SearchArea> {
 
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime? startDate = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme(brightness: Brightness.dark,
+                    primary: primaryColor,
+                    onPrimary: Colors.white,
+                    secondary: tintColor,
+                    onSecondary: Colors.white,
+                    error: Colors.red,
+                    onError: Colors.white,
+                    surface: bgColor,
+                    onSurface: Colors.white)
+            ), child: child!,
+          );
+        },
         context: context,
         initialDate: _startDate,
         firstDate: DateTime(2024, 1),
@@ -33,6 +48,21 @@ class _SearchAreaState extends State<SearchArea> {
 
   Future<void> _selectEndDate(BuildContext context) async {
     final DateTime? endDate = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme(brightness: Brightness.dark,
+                      primary: primaryColor,
+                      onPrimary: Colors.white,
+                      secondary: tintColor,
+                      onSecondary: Colors.white,
+                      error: Colors.red,
+                      onError: Colors.white,
+                      surface: bgColor,
+                      onSurface: Colors.white)
+              ), child: child!,
+          );
+        },
         context: context,
         initialDate: _endDate,
         firstDate: _startDate,

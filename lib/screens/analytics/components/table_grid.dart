@@ -16,8 +16,8 @@ class TableGrid extends StatelessWidget {
       ),
       child: DataTable(
           columns: [
-            DataColumn(label: Text('A')),
-            DataColumn(label: Text('B')),
+            DataColumn(label: Text('날짜')),
+            DataColumn(label: Text('가격 (원)')),
           ],
           rows: [
             DataRow(cells: [
