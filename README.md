@@ -12,6 +12,11 @@
 이 솔루션은 다양한 원자재의 가격 데이터를 수집하고, 이를 시각화하여 사용자에게 제공함으로써 가격 변동 추세를 쉽게 파악할 수 있도록 돕습니다.
 
 
-## 데이터 출처
+## Data Sources
 
 * [한국비철금속협회](https://www.nonferrous.or.kr/)
+
+
+## References
+
+* [Smart Admin Panel & Dashboard](https://github.com/deniscolak/smart-admin-dashboard)
