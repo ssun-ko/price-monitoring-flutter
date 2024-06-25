@@ -62,7 +62,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                     },
                     child: Icon(
                       Icons.chevron_left,
-                      color: greenColor,
+                      color: ColorConstants.green
                     ),
                   ),
                   InkWell(
@@ -75,7 +75,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                     },
                     child: Icon(
                       Icons.chevron_right,
-                      color: greenColor,
+                      color: ColorConstants.green
                     ),
                   ),
                 ],
@@ -106,11 +106,11 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               },
               calendarStyle: CalendarStyle(
                 todayDecoration: BoxDecoration(
-                  color: greenColor,
+                  color: ColorConstants.green,
                   shape: BoxShape.circle,
                 ),
                 markerDecoration: BoxDecoration(
-                  color: greenColor,
+                  color: ColorConstants.green,
                   shape: BoxShape.circle,
                 ),
               ),

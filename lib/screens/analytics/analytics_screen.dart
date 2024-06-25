@@ -30,7 +30,7 @@ class AnalyticsScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: greenColor,
+                        backgroundColor: ColorConstants.green,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5)

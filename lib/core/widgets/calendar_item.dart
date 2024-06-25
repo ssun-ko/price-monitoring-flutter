@@ -87,7 +87,7 @@ class _Date extends StatelessWidget {
         color: secondaryColor,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: greenColor.withOpacity(0.5),
+          color: ColorConstants.green,
         ),
       ),
       child: Text(

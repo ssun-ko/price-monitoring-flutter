@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color(0xFF2697FF);
+const primaryColor = Colors.blue;
+const tintColor = Colors.pink;
 
 const secondaryColor = Color(0xFF292929);
-const bgColor = Color(0xFF212121);
-const darkGreenColor = Color(0xFF2c614f);
-const greenColor = Color(0xFF6bab58);
+const bgColor = Colors.black;
 
 const dimColor = Colors.white54;
 
@@ -13,7 +12,8 @@ const defaultPadding = 16.0;
 const double defaultBorderRadius = 15;
 
 class ColorConstants {
-  static Color blue = Color(0xFF0D46BB);
+  static Color blue = Colors.blue;
+  static Color green = Colors.green;
 }
 
 class Palette {
