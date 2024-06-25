@@ -124,6 +124,7 @@ class _SearchAreaState extends State<SearchArea> {
                       children: <Widget>[
                         Text("${_startDate.toLocal()}".split(' ')[0]),
                         IconButton(
+                            color: Colors.white,
                             onPressed: () => _selectStartDate(context),
                             icon: Icon(Icons.calendar_month))
                       ],
@@ -134,6 +135,7 @@ class _SearchAreaState extends State<SearchArea> {
                       children: <Widget>[
                         Text("${_endDate.toLocal()}".split(' ')[0]),
                         IconButton(
+                            color: Colors.white,
                             onPressed: () => _selectEndDate(context),
                             icon: Icon(Icons.calendar_month))
                       ],
