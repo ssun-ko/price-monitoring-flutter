@@ -7,10 +7,9 @@
   </h1>
 </a>
 
-본 프로젝트는 건설 프로젝트에 사용되는 원자재의 가격 변동을 모니터링하고 분석하는 솔루션입니다.
-건설 산업은 원자재 가격 변동에 큰 영향을 받기 때문에, 정확하고 신속한 가격 정보를 제공하는 것은 프로젝트 비용 관리와 예산 책정에 매우 중요합니다.
-이 솔루션은 다양한 원자재의 가격 데이터를 수집하고, 이를 시각화하여 사용자에게 제공함으로써 가격 변동 추세를 쉽게 파악할 수 있도록 돕습니다.
-
+This project offers a solution tailored to monitor and analyze price fluctuations of raw materials used in construction projects.
+Given the significant impact of raw material price changes on the construction industry, providing precise and timely price information is paramount for effective project cost management and budgeting.
+The solution gathers price data for diverse raw materials and presents it through visualizations, facilitating easy identification of price fluctuation trends for users.
 
 ## Data Sources
 
