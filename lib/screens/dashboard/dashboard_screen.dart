@@ -2,7 +2,6 @@ import 'package:price_monitoring/core/constants/color_constants.dart';
 import 'package:price_monitoring/responsive.dart';
 
 import 'package:price_monitoring/screens/dashboard/components/recent_forums.dart';
-import 'package:price_monitoring/screens/dashboard/components/recent_users.dart';
 import 'package:price_monitoring/screens/dashboard/components/user_details_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class DashboardScreen extends StatelessWidget {
                     flex: 5,
                     child: Column(
                       children: [
-                        RecentUsers(),
+                        RecentDiscussions(),
                         SizedBox(height: defaultPadding),
                         RecentDiscussions(),
                         if (Responsive.isMobile(context))

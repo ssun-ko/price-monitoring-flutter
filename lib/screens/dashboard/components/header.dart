@@ -1,5 +1,7 @@
+import 'package:price_monitoring/providers/drawer_provider.dart';
 import 'package:price_monitoring/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -13,7 +15,7 @@ class Header extends StatelessWidget {
         if (!Responsive.isDesktop(context))
           IconButton(
             icon: Icon(Icons.menu),
-            onPressed: () {},
+            onPressed: context.read<DrawerProvider>().openDrawer
           )
       ],
     );

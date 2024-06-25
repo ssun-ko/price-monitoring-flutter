@@ -1,4 +1,5 @@
 import 'package:price_monitoring/core/constants/color_constants.dart';
+import 'package:price_monitoring/providers/drawer_provider.dart';
 import 'package:price_monitoring/providers/menu_provider.dart';
 import 'package:price_monitoring/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,10 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => MenuProvider())],
+    providers: [
+      ChangeNotifierProvider(create: (_) => MenuProvider()),
+      ChangeNotifierProvider(create: (context) => DrawerProvider(),)
+    ],
     child: MyApp(),
   ));
 }

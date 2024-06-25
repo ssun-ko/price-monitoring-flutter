@@ -1,3 +1,4 @@
+import 'package:price_monitoring/providers/drawer_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:price_monitoring/providers/menu_provider.dart';
 import 'package:price_monitoring/responsive.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<DrawerProvider>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
