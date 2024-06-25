@@ -15,21 +15,21 @@ class TableGrid extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: DataTable(
-          columns: [
-            DataColumn(label: Text('날짜')),
-            DataColumn(label: Text('가격 (원)')),
-          ],
-          rows: [
-            DataRow(cells: [
-              DataCell(Text('A1')),
-              DataCell(Text('B1')),
-            ]),
-            DataRow(cells: [
-              DataCell(Text('A2')),
-              DataCell(Text('B2')),
-            ]),
-          ],
-        ),
-      );
+        columns: [
+          DataColumn(label: Text('날짜')),
+          DataColumn(label: Text('가격 (원)')),
+        ],
+        rows: [
+          DataRow(cells: [
+            DataCell(Text('A1')),
+            DataCell(Text('B1')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('A2')),
+            DataCell(Text('B2')),
+          ]),
+        ],
+      ),
+    );
   }
 }

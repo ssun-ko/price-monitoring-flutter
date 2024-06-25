@@ -22,7 +22,8 @@ class _SearchAreaState extends State<SearchArea> {
         builder: (context, child) {
           return Theme(
             data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme(brightness: Brightness.dark,
+                colorScheme: ColorScheme(
+                    brightness: Brightness.dark,
                     primary: primaryColor,
                     onPrimary: Colors.white,
                     secondary: tintColor,
@@ -30,10 +31,11 @@ class _SearchAreaState extends State<SearchArea> {
                     error: Colors.red,
                     onError: Colors.white,
                     surface: bgColor,
-                    onSurface: Colors.white)
-            ), child: child!,
+                    onSurface: Colors.white)),
+            child: child!,
           );
         },
+        locale: const Locale('ko', 'KR'),
         context: context,
         initialDate: _startDate,
         firstDate: DateTime(2024, 1),
@@ -50,19 +52,21 @@ class _SearchAreaState extends State<SearchArea> {
     final DateTime? endDate = await showDatePicker(
         builder: (context, child) {
           return Theme(
-              data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme(brightness: Brightness.dark,
-                      primary: primaryColor,
-                      onPrimary: Colors.white,
-                      secondary: tintColor,
-                      onSecondary: Colors.white,
-                      error: Colors.red,
-                      onError: Colors.white,
-                      surface: bgColor,
-                      onSurface: Colors.white)
-              ), child: child!,
+            data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme(
+                    brightness: Brightness.dark,
+                    primary: primaryColor,
+                    onPrimary: Colors.white,
+                    secondary: tintColor,
+                    onSecondary: Colors.white,
+                    error: Colors.red,
+                    onError: Colors.white,
+                    surface: bgColor,
+                    onSurface: Colors.white)),
+            child: child!,
           );
         },
+        locale: const Locale('ko', 'KR'),
         context: context,
         initialDate: _endDate,
         firstDate: _startDate,
