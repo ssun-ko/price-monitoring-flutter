@@ -11,7 +11,7 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: bgColor,
+      backgroundColor: secondaryColor,
       child: SingleChildScrollView(
         child: Column(
           children: [

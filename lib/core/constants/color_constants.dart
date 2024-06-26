@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 const primaryColor = Colors.blue;
 const tintColor = Colors.pink;
 
-const secondaryColor = Color(0xFF292929);
-const bgColor = Colors.black;
+const secondaryColor = Color(0xFF2B2D30);
+const bgColor = Color(0xFF1E1F22);
 
 const dimColor = Colors.white54;
 
