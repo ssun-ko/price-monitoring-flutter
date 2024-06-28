@@ -25,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final rawData = await rootBundle.loadString("data/monthly_metal_data.csv");
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
 
+    print(rawData);
+
     setState(() {
       context.read<MonthlyMetalDataProvider>().readData(listData);
     });
