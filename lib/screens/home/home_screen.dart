@@ -1,6 +1,6 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
-import 'package:price/providers/data_provider.dart';
+import 'package:price/providers/daily_data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:price/providers/menu_provider.dart';
@@ -18,11 +18,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void _loadCSV() async {
-    final rawData = await rootBundle.loadString("data/data.csv");
+    final rawData = await rootBundle.loadString("data/daily_data.csv");
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
 
     setState(() {
-      context.read<DataProvider>().readData(listData);
+      context.read<DailyDataProvider>().readData(listData);
     });
   }
 

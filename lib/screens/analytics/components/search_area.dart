@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
 
-const List<String> list = <String>['철강', '시멘트', '레미콘'];
-
 class SearchArea extends StatefulWidget {
   const SearchArea({
     Key? key,
@@ -13,7 +11,6 @@ class SearchArea extends StatefulWidget {
 }
 
 class _SearchAreaState extends State<SearchArea> {
-  String _dropDownValue = list.first;
   DateTime _startDate = DateTime.now();
   DateTime _endDate = DateTime.now();
 
@@ -88,30 +85,6 @@ class _SearchAreaState extends State<SearchArea> {
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("데이터 항목", style: TextStyle(color: dimColor)),
-              SizedBox(
-                height: 50,
-                child: DropdownButton<String>(
-                  value: _dropDownValue,
-                  items: list.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _dropDownValue = value!;
-                    });
-                  },
-                ),
-              )
-            ],
-          ),
-          SizedBox(width: defaultPadding * 3),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

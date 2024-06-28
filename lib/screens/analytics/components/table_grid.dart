@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
-import 'package:price/providers/data_provider.dart';
+import 'package:price/providers/daily_data_provider.dart';
 import 'package:provider/provider.dart';
 
 class TableGrid extends StatelessWidget {
@@ -18,10 +18,10 @@ class TableGrid extends StatelessWidget {
       ),
       child: DataTable(
         columns:
-            context.watch<DataProvider>().data[0].map((column) => DataColumn(
+            context.watch<DailyDataProvider>().data[0].map((column) => DataColumn(
                   label: Text(column.toString()),
                 )).toList(),
-        rows: context.watch<DataProvider>().data.sublist(1).map((row) => DataRow(
+        rows: context.watch<DailyDataProvider>().data.sublist(1).map((row) => DataRow(
           cells: row.map((cell) => DataCell(
             Text(cell.toString())
           )).toList()
