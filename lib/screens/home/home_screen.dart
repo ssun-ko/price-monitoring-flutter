@@ -23,9 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void _loadMonthlyMetalCSV() async {
     final rawData = await rootBundle.loadString("data/monthly_metal_data.csv");
-    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
-
-    print(rawData);
+    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<MonthlyMetalDataProvider>().readData(listData);
@@ -34,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadDailyNometalCSV() async {
     final rawData = await rootBundle.loadString("data/daily_nometal_data.csv");
-    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DailyNometalDataProvider>().readData(listData);
@@ -43,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadDailyOilCSV() async {
     final rawData = await rootBundle.loadString("data/daily_oil_data.csv");
-    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DailyOilDataProvider>().readData(listData);
