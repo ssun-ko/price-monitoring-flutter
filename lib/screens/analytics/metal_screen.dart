@@ -8,6 +8,7 @@ import 'package:price/core/constants/color_constants.dart';
 import 'package:price/providers/monthly_metal_data_provider.dart';
 import 'package:price/screens/dashboard/components/header.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MetalScreen extends StatefulWidget {
   @override
@@ -105,8 +106,8 @@ class _MetalScreenState extends State<MetalScreen> {
         },
         locale: const Locale('ko', 'KR'),
         context: context,
-        initialDate: _startDate,
-        firstDate: DateTime(2024, 1),
+        initialDate: _endDate,
+        firstDate: _startDate,
         lastDate: DateTime(2026, 12));
 
     if (endDate != null && endDate != _endDate) {
@@ -151,7 +152,8 @@ class _MetalScreenState extends State<MetalScreen> {
                             children: [
                               Row(
                                 children: <Widget>[
-                                  Text("${DateFormat('yyyy-MM').format(_startDate)}"),
+                                  Text(
+                                      "${DateFormat('yyyy-MM').format(_startDate)}"),
                                   IconButton(
                                       color: Colors.white,
                                       onPressed: () =>
@@ -163,7 +165,8 @@ class _MetalScreenState extends State<MetalScreen> {
                               SizedBox(width: defaultPadding / 2),
                               Row(
                                 children: <Widget>[
-                                  Text("${DateFormat('yyyy-MM').format(_endDate)}"),
+                                  Text(
+                                      "${DateFormat('yyyy-MM').format(_endDate)}"),
                                   IconButton(
                                       color: Colors.white,
                                       onPressed: () => _selectEndDate(context),
@@ -187,6 +190,49 @@ class _MetalScreenState extends State<MetalScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
                         child: Text("검색"))
+                  ],
+                ),
+              ),
+              SizedBox(height: defaultPadding),
+              Container(
+                padding: EdgeInsets.all(defaultPadding),
+                decoration: BoxDecoration(
+                    color: secondaryColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SfCartesianChart(
+                          legend: Legend(isVisible: true),
+                          tooltipBehavior: TooltipBehavior(enable: true),
+                          primaryXAxis: CategoryAxis(),
+                          series: <CartesianSeries>[
+                            SplineSeries<_MetalData, String>(
+                                name: "철근",
+                                dataSource: _getChartData(0),
+                                xValueMapper: (_MetalData data, _) => data.date,
+                                yValueMapper: (_MetalData data, _) =>
+                                    data.rebar),
+                            SplineSeries<_MetalData, String>(
+                                name: "철광석",
+                                dataSource: _getChartData(0),
+                                xValueMapper: (_MetalData data, _) => data.date,
+                                yValueMapper: (_MetalData data, _) =>
+                                    data.iron_ore),
+                            SplineSeries<_MetalData, String>(
+                                name: "유연탄",
+                                dataSource: _getChartData(0),
+                                xValueMapper: (_MetalData data, _) => data.date,
+                                yValueMapper: (_MetalData data, _) =>
+                                    data.bituminous_coal),
+                            SplineSeries<_MetalData, String>(
+                                name: "철스크랩",
+                                dataSource: _getChartData(0),
+                                xValueMapper: (_MetalData data, _) => data.date,
+                                yValueMapper: (_MetalData data, _) =>
+                                    data.scrap)
+                          ]),
+                    )
                   ],
                 ),
               ),
@@ -240,4 +286,33 @@ class _MetalScreenState extends State<MetalScreen> {
       ),
     );
   }
+
+  List<_MetalData> _getChartData(int index) {
+    List<_MetalData> seriesData = [];
+    DateFormat format = DateFormat('yyyy-MM');
+
+    for (int i = 1; i < filteredData.length; i++) {
+      dynamic date = filteredData[i][0];
+      dynamic rebar = filteredData[i][1];
+      dynamic iron_ore = filteredData[i][2];
+      dynamic bituminous_coal = filteredData[i][3];
+      dynamic scrap = filteredData[i][4];
+
+      seriesData.add(_MetalData(date.toString(), rebar.toDouble(),
+          iron_ore.toDouble(), bituminous_coal.toDouble(), scrap.toDouble()));
+    }
+
+    return seriesData;
+  }
+}
+
+class _MetalData {
+  _MetalData(
+      this.date, this.rebar, this.iron_ore, this.bituminous_coal, this.scrap);
+
+  final String date;
+  final double rebar;
+  final double iron_ore;
+  final double bituminous_coal;
+  final double scrap;
 }

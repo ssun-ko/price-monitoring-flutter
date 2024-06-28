@@ -23,7 +23,7 @@ class SideMenu extends StatelessWidget {
                   children: [Text("원자재 가격 모니터링 시스템")],
                 ))),
             DrawerListTile(
-              title: "대시보드",
+              title: "종합 대시보드",
               icon: Icons.dashboard_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 1 ? true : false,
@@ -32,7 +32,7 @@ class SideMenu extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              title: "철강 데이터",
+              title: "철강 가격 정보",
               icon: Icons.analytics_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 2 ? true : false,
@@ -41,7 +41,7 @@ class SideMenu extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              title: "비철금속 데이터",
+              title: "비철금속 가격 정보",
               icon: Icons.area_chart_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 3 ? true : false,
@@ -50,7 +50,7 @@ class SideMenu extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              title: "유가 데이터",
+              title: "유가 정보",
               icon: Icons.data_exploration_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 4 ? true : false,
