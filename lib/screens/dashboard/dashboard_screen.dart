@@ -2,7 +2,6 @@ import 'package:price/core/constants/color_constants.dart';
 import 'package:price/responsive.dart';
 
 import 'package:price/screens/dashboard/components/recent_forums.dart';
-import 'package:price/screens/dashboard/components/user_details_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'components/header.dart';
@@ -29,17 +28,11 @@ class DashboardScreen extends StatelessWidget {
                         RecentDiscussions(),
                         if (Responsive.isMobile(context))
                           SizedBox(height: defaultPadding),
-                        if (Responsive.isMobile(context)) UserDetailsWidget(),
                       ],
                     ),
                   ),
                   if (!Responsive.isMobile(context))
                     SizedBox(width: defaultPadding),
-                  if (!Responsive.isMobile(context))
-                    Expanded(
-                      flex: 2,
-                      child: UserDetailsWidget(),
-                    ),
                 ],
               )
             ],

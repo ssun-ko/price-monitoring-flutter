@@ -24,7 +24,7 @@ class SideMenu extends StatelessWidget {
                 ))),
             DrawerListTile(
               title: "대시보드",
-              icon: Icons.dashboard,
+              icon: Icons.dashboard_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 1 ? true : false,
               press: () {
@@ -32,12 +32,30 @@ class SideMenu extends StatelessWidget {
               },
             ),
             DrawerListTile(
-              title: "데이터 조회",
-              icon: Icons.analytics,
+              title: "철강 데이터",
+              icon: Icons.analytics_rounded,
               isSelected:
                   context.watch<MenuProvider>().menu == 2 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(2);
+              },
+            ),
+            DrawerListTile(
+              title: "비철금속 데이터",
+              icon: Icons.area_chart_rounded,
+              isSelected:
+                  context.watch<MenuProvider>().menu == 3 ? true : false,
+              press: () {
+                context.read<MenuProvider>().changeMenu(3);
+              },
+            ),
+            DrawerListTile(
+              title: "유가 데이터",
+              icon: Icons.data_exploration_rounded,
+              isSelected:
+                  context.watch<MenuProvider>().menu == 4 ? true : false,
+              press: () {
+                context.read<MenuProvider>().changeMenu(4);
               },
             )
           ],

@@ -1,14 +1,18 @@
 import 'package:csv/csv.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:price/providers/daily_data_provider.dart';
+import 'package:price/providers/daily_nometal_data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:price/providers/menu_provider.dart';
 import 'package:price/responsive.dart';
-import 'package:price/screens/analytics/analytics_screen.dart';
+import 'package:price/screens/analytics/metal_screen.dart';
+import 'package:price/screens/analytics/nometal_screen.dart';
+import 'package:price/screens/analytics/oil_screen.dart';
 import 'package:price/screens/dashboard/dashboard_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/daily_oil_data_provider.dart';
+import '../../providers/monthly_metal_data_provider.dart';
 import 'components/side_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,20 +21,40 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _loadCSV() async {
-    final rawData = await rootBundle.loadString("data/daily_data.csv");
+  void _loadMonthlyMetalCSV() async {
+    final rawData = await rootBundle.loadString("data/monthly_metal_data.csv");
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
 
     setState(() {
-      context.read<DailyDataProvider>().readData(listData);
+      context.read<MonthlyMetalDataProvider>().readData(listData);
+    });
+  }
+
+  void _loadDailyNometalCSV() async {
+    final rawData = await rootBundle.loadString("data/daily_nometal_data.csv");
+    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+
+    setState(() {
+      context.read<DailyNometalDataProvider>().readData(listData);
+    });
+  }
+
+  void _loadDailyOilCSV() async {
+    final rawData = await rootBundle.loadString("data/daily_oil_data.csv");
+    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+
+    setState(() {
+      context.read<DailyOilDataProvider>().readData(listData);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _loadCSV();
- }
+    _loadMonthlyMetalCSV();
+    _loadDailyNometalCSV();
+    _loadDailyOilCSV();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +65,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (Responsive.isDesktop(context))
-              Expanded(
-                child: SideMenu()
-              ),
+            if (Responsive.isDesktop(context)) Expanded(child: SideMenu()),
             Expanded(
-              flex: 7,
-              child: context.watch<MenuProvider>().menu == 1
-                  ? DashboardScreen()
-                  : AnalyticsScreen(),
-            ),
+                flex: 7,
+                child: context.watch<MenuProvider>().menu == 1
+                    ? DashboardScreen()
+                    : context.watch<MenuProvider>().menu == 2
+                        ? MetalScreen()
+                        : context.watch<MenuProvider>().menu == 3
+                            ? NometalScreen()
+                            : OilScreen()),
           ],
         ),
       ),

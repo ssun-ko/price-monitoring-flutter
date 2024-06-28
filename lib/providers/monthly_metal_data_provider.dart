@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DailyDataProvider extends ChangeNotifier {
+class MonthlyMetalDataProvider extends ChangeNotifier {
   List<List<dynamic>> _data = [];
   List<List<dynamic>> get data => _data;
 
