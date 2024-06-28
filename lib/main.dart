@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price/core/constants/color_constants.dart';
+import 'package:price/providers/data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
 import 'package:price/providers/menu_provider.dart';
 import 'package:price/screens/home/home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,13 +14,15 @@ void main() {
       ChangeNotifierProvider(create: (_) => MenuProvider()),
       ChangeNotifierProvider(
         create: (context) => DrawerProvider(),
-      )
+      ),
+      ChangeNotifierProvider(create: (_)  => DataProvider())
     ],
     child: MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

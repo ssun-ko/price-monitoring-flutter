@@ -60,10 +60,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                             DateTime(_focusedDay.year, _focusedDay.month - 1);
                       });
                     },
-                    child: Icon(
-                      Icons.chevron_left,
-                      color: ColorConstants.green
-                    ),
+                    child:
+                        Icon(Icons.chevron_left, color: ColorConstants.green),
                   ),
                   InkWell(
                     onTap: () {
@@ -73,10 +71,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                             DateTime(_focusedDay.year, _focusedDay.month + 1);
                       });
                     },
-                    child: Icon(
-                      Icons.chevron_right,
-                      color: ColorConstants.green
-                    ),
+                    child:
+                        Icon(Icons.chevron_right, color: ColorConstants.green),
                   ),
                 ],
               )

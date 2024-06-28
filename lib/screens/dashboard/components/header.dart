@@ -14,9 +14,8 @@ class Header extends StatelessWidget {
       children: [
         if (!Responsive.isDesktop(context))
           IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: context.read<DrawerProvider>().openDrawer
-          )
+              icon: Icon(Icons.menu),
+              onPressed: context.read<DrawerProvider>().openDrawer)
       ],
     );
   }

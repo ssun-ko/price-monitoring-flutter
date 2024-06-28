@@ -1,3 +1,6 @@
+import 'package:csv/csv.dart';
+import 'package:flutter/services.dart';
+import 'package:price/providers/data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:price/providers/menu_provider.dart';
@@ -8,7 +11,27 @@ import 'package:flutter/material.dart';
 
 import 'components/side_menu.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  void _loadCSV() async {
+    final rawData = await rootBundle.loadString("data/data.csv");
+    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+
+    setState(() {
+      context.read<DataProvider>().readData(listData);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCSV();
+ }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +43,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             if (Responsive.isDesktop(context))
               Expanded(
-                child: SideMenu(),
+                child: SideMenu()
               ),
             Expanded(
               flex: 7,
-              child: context.watch<MenuProvider>().menu == 1 ? DashboardScreen() : AnalyticsScreen(),
+              child: context.watch<MenuProvider>().menu == 1
+                  ? DashboardScreen()
+                  : AnalyticsScreen(),
             ),
           ],
         ),

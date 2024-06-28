@@ -25,7 +25,8 @@ class SideMenu extends StatelessWidget {
             DrawerListTile(
               title: "대시보드",
               icon: Icons.dashboard,
-              isSelected: context.watch<MenuProvider>().menu == 1 ? true : false,
+              isSelected:
+                  context.watch<MenuProvider>().menu == 1 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(1);
               },
@@ -33,7 +34,8 @@ class SideMenu extends StatelessWidget {
             DrawerListTile(
               title: "데이터 조회",
               icon: Icons.analytics,
-              isSelected: context.watch<MenuProvider>().menu == 2 ? true : false,
+              isSelected:
+                  context.watch<MenuProvider>().menu == 2 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(2);
               },
@@ -65,10 +67,10 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: press,
       horizontalTitleGap: 15,
-      leading: Icon(icon, color: isSelected? primaryColor : dimColor),
+      leading: Icon(icon, color: isSelected ? primaryColor : dimColor),
       title: Text(
         title,
-        style: TextStyle(color: isSelected? primaryColor : dimColor),
+        style: TextStyle(color: isSelected ? primaryColor : dimColor),
       ),
     );
   }

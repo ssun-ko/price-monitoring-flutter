@@ -28,14 +28,13 @@ class AnalyticsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(onPressed: () {},
+                  ElevatedButton(
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorConstants.green,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)
-                        )
-                      ),
+                          backgroundColor: ColorConstants.green,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5))),
                       child: Text("엑셀 다운로드")),
                 ],
               ),

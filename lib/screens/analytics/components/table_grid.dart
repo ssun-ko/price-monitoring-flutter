@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
+import 'package:price/providers/data_provider.dart';
+import 'package:provider/provider.dart';
 
 class TableGrid extends StatelessWidget {
   const TableGrid({
@@ -15,20 +17,15 @@ class TableGrid extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: DataTable(
-        columns: [
-          DataColumn(label: Text('날짜')),
-          DataColumn(label: Text('가격 (원)')),
-        ],
-        rows: [
-          DataRow(cells: [
-            DataCell(Text('A1')),
-            DataCell(Text('B1')),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('A2')),
-            DataCell(Text('B2')),
-          ]),
-        ],
+        columns:
+            context.watch<DataProvider>().data[0].map((column) => DataColumn(
+                  label: Text(column.toString()),
+                )).toList(),
+        rows: context.watch<DataProvider>().data.sublist(1).map((row) => DataRow(
+          cells: row.map((cell) => DataCell(
+            Text(cell.toString())
+          )).toList()
+        )).toList()
       ),
     );
   }
