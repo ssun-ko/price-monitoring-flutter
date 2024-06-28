@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void _loadMonthlyMetalCSV() async {
     final rawData = await rootBundle.loadString("data/monthly_metal_data.csv");
-    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
+    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<MonthlyMetalDataProvider>().readData(listData);
