@@ -204,7 +204,7 @@ class _MetalScreenState extends State<MetalScreen> {
                     Expanded(
                       child: SfCartesianChart(
                           legend: Legend(isVisible: true),
-                          tooltipBehavior: TooltipBehavior(enable: true),
+                          tooltipBehavior: TooltipBehavior(enable: true, color: bgColor,textStyle: TextStyle(color: Colors.white)),
                           primaryXAxis: CategoryAxis(),
                           series: <CartesianSeries>[
                             SplineSeries<_MetalData, String>(
