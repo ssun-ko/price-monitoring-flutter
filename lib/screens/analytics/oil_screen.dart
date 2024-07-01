@@ -1,11 +1,15 @@
-import 'dart:convert';
-import 'dart:html' as html;
-
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:price/core/constants/color_constants.dart';
-import 'package:price/providers/daily_oil_data_provider.dart';
+import 'package:price/core/constants/string_constants.dart';
+import 'package:price/core/themes/custom_datepicker_theme.dart';
+import 'package:price/core/utils/csv_util.dart';
+import 'package:price/core/utils/search_util.dart';
+import 'package:price/providers/data_provider.dart';
+import 'package:price/screens/analytics/components/chart_section.dart';
+import 'package:price/screens/analytics/components/data_table_section.dart';
+import 'package:price/screens/analytics/components/download_snackbar.dart';
+import 'package:price/screens/analytics/components/excel_download_button.dart';
+import 'package:price/screens/analytics/components/search_section.dart';
 import 'package:price/screens/dashboard/components/header.dart';
 import 'package:provider/provider.dart';
 
@@ -21,54 +25,11 @@ class _OilScreenState extends State<OilScreen> {
   List<List<dynamic>> data = [];
   List<List<dynamic>> filteredData = [];
 
-  void filterDataByDate(DateTime startDate, DateTime endDate) {
-    DateFormat format = DateFormat('yyyy-MM-dd');
-
-    setState(() {
-      filteredData = data.where((row) {
-        if (row == data[0]) return true;
-        DateTime date = format.parse(row[0]);
-        return (date.isAfter(startDate) || date.isAtSameMomentAs(startDate)) &&
-            (date.isBefore(endDate) || date.isAtSameMomentAs(endDate));
-      }).toList();
-    });
-  }
-
-  Future<void> downloadCSV() async {
-    List<List<dynamic>> rows = filteredData;
-    String csv = const ListToCsvConverter().convert(rows);
-
-    final bytes = utf8.encode(csv);
-    final blob = html.Blob([bytes]);
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchor = html.AnchorElement(href: url)
-      ..setAttribute("download", "data.csv")
-      ..click();
-    html.Url.revokeObjectUrl(url);
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: primaryColor,
-        content: Text(
-          '파일이 다운로드 됩니다.',
-          style: TextStyle(color: Colors.white),
-        )));
-  }
-
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime? startDate = await showDatePicker(
         builder: (context, child) {
           return Theme(
-            data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme(
-                    brightness: Brightness.dark,
-                    primary: primaryColor,
-                    onPrimary: Colors.white,
-                    secondary: tintColor,
-                    onSecondary: Colors.white,
-                    error: Colors.red,
-                    onError: Colors.white,
-                    surface: secondaryColor,
-                    onSurface: Colors.white)),
+            data: CustomDatePickerTheme.theme,
             child: child!,
           );
         },
@@ -89,17 +50,7 @@ class _OilScreenState extends State<OilScreen> {
     final DateTime? endDate = await showDatePicker(
         builder: (context, child) {
           return Theme(
-            data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme(
-                    brightness: Brightness.dark,
-                    primary: primaryColor,
-                    onPrimary: Colors.white,
-                    secondary: tintColor,
-                    onSecondary: Colors.white,
-                    error: Colors.red,
-                    onError: Colors.white,
-                    surface: secondaryColor,
-                    onSurface: Colors.white)),
+            data: CustomDatePickerTheme.theme,
             child: child!,
           );
         },
@@ -120,8 +71,9 @@ class _OilScreenState extends State<OilScreen> {
   void initState() {
     super.initState();
     setState(() {
-      data = context.read<DailyOilDataProvider>().data;
-      filterDataByDate(_startDate, _endDate);
+      data = context.read<DataProvider>().oilData;
+      filteredData =
+          SearchUtil().filterDataByDate(data, _startDate, _endDate, false);
     });
   }
 
@@ -142,43 +94,20 @@ class _OilScreenState extends State<OilScreen> {
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: Row(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("조회기간", style: TextStyle(color: dimColor)),
-                        SizedBox(
-                          child: Row(
-                            children: [
-                              Row(
-                                children: <Widget>[
-                                  Text("${_startDate.toLocal()}".split(' ')[0]),
-                                  IconButton(
-                                      color: Colors.white,
-                                      onPressed: () =>
-                                          _selectStartDate(context),
-                                      icon: Icon(Icons.calendar_month))
-                                ],
-                              ),
-                              Text("~"),
-                              SizedBox(width: defaultPadding / 2),
-                              Row(
-                                children: <Widget>[
-                                  Text("${_endDate.toLocal()}".split(' ')[0]),
-                                  IconButton(
-                                      color: Colors.white,
-                                      onPressed: () => _selectEndDate(context),
-                                      icon: Icon(Icons.calendar_month))
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                    SearchSection(
+                        startDate: _startDate,
+                        endDate: _endDate,
+                        onStartDatePressed: () => _selectStartDate(context),
+                        onEndDatePressed: () => _selectEndDate(context),
+                        isMonthly: false),
                     Spacer(),
                     ElevatedButton(
                         onPressed: () {
-                          filterDataByDate(_startDate, _endDate);
+                          setState(() {
+                            filteredData = SearchUtil().filterDataByDate(
+                                data, _startDate, _endDate, false);
+                          });
+                          ;
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: primaryColor,
@@ -186,54 +115,19 @@ class _OilScreenState extends State<OilScreen> {
                             padding: EdgeInsets.all(5),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
-                        child: Text("검색"))
+                        child: Text(searchButtonLabel))
                   ],
                 ),
               ),
               SizedBox(height: defaultPadding),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        downloadCSV();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorConstants.green,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5))),
-                      child: Text("엑셀 다운로드")),
-                ],
-              ),
+              ChartSection(data: filteredData),
               SizedBox(height: defaultPadding),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    decoration: BoxDecoration(
-                      color: secondaryColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: DataTable(
-                        columns: filteredData[0]
-                            .map((column) => DataColumn(
-                                  label: Text(column.toString()),
-                                ))
-                            .toList(),
-                        rows: filteredData
-                            .sublist(1)
-                            .map((row) => DataRow(
-                                cells: row
-                                    .map((cell) =>
-                                        DataCell(Text(cell.toString())))
-                                    .toList()))
-                            .toList()),
-                  )),
-                ],
-              )
+              ExcelDownloadButton(onPressed: () {
+                CSVUtil.downloadCSV(data, fileName);
+                DownloadSnackBar.showSnackBar(context);
+              }),
+              SizedBox(height: defaultPadding),
+              DataTableSection(filteredData: filteredData)
             ],
           ),
         ),

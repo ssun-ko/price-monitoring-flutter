@@ -1,14 +1,17 @@
-import 'dart:convert';
-import 'dart:html' as html;
-
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:price/core/constants/color_constants.dart';
-import 'package:price/providers/monthly_metal_data_provider.dart';
+import 'package:price/core/constants/string_constants.dart';
+import 'package:price/core/themes/custom_datepicker_theme.dart';
+import 'package:price/core/utils/csv_util.dart';
+import 'package:price/core/utils/search_util.dart';
+import 'package:price/providers/data_provider.dart';
+import 'package:price/screens/analytics/components/chart_section.dart';
+import 'package:price/screens/analytics/components/data_table_section.dart';
+import 'package:price/screens/analytics/components/download_snackbar.dart';
+import 'package:price/screens/analytics/components/excel_download_button.dart';
+import 'package:price/screens/analytics/components/search_section.dart';
 import 'package:price/screens/dashboard/components/header.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MetalScreen extends StatefulWidget {
   @override
@@ -22,54 +25,11 @@ class _MetalScreenState extends State<MetalScreen> {
   List<List<dynamic>> data = [];
   List<List<dynamic>> filteredData = [];
 
-  void filterDataByDate(DateTime startDate, DateTime endDate) {
-    DateFormat format = DateFormat('yyyy-MM');
-
-    setState(() {
-      filteredData = data.where((row) {
-        if (row == data[0]) return true;
-        DateTime date = format.parse(row[0]);
-        return (date.isAfter(startDate) || date.isAtSameMomentAs(startDate)) &&
-            (date.isBefore(endDate) || date.isAtSameMomentAs(endDate));
-      }).toList();
-    });
-  }
-
-  Future<void> downloadCSV() async {
-    List<List<dynamic>> rows = filteredData;
-    String csv = const ListToCsvConverter().convert(rows);
-
-    final bytes = utf8.encode(csv);
-    final blob = html.Blob([bytes]);
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchor = html.AnchorElement(href: url)
-      ..setAttribute("download", "data.csv")
-      ..click();
-    html.Url.revokeObjectUrl(url);
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: primaryColor,
-        content: Text(
-          '파일이 다운로드 됩니다.',
-          style: TextStyle(color: Colors.white),
-        )));
-  }
-
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime? startDate = await showDatePicker(
         builder: (context, child) {
           return Theme(
-            data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme(
-                    brightness: Brightness.dark,
-                    primary: primaryColor,
-                    onPrimary: Colors.white,
-                    secondary: tintColor,
-                    onSecondary: Colors.white,
-                    error: Colors.red,
-                    onError: Colors.white,
-                    surface: secondaryColor,
-                    onSurface: Colors.white)),
+            data: CustomDatePickerTheme.theme,
             child: child!,
           );
         },
@@ -90,17 +50,7 @@ class _MetalScreenState extends State<MetalScreen> {
     final DateTime? endDate = await showDatePicker(
         builder: (context, child) {
           return Theme(
-            data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme(
-                    brightness: Brightness.dark,
-                    primary: primaryColor,
-                    onPrimary: Colors.white,
-                    secondary: tintColor,
-                    onSecondary: Colors.white,
-                    error: Colors.red,
-                    onError: Colors.white,
-                    surface: secondaryColor,
-                    onSurface: Colors.white)),
+            data: CustomDatePickerTheme.theme,
             child: child!,
           );
         },
@@ -121,8 +71,9 @@ class _MetalScreenState extends State<MetalScreen> {
   void initState() {
     super.initState();
     setState(() {
-      data = context.read<MonthlyMetalDataProvider>().data;
-      filterDataByDate(_startDate, _endDate);
+      data = context.read<DataProvider>().metalData;
+      filteredData =
+          SearchUtil().filterDataByDate(data, _startDate, _endDate, true);
     });
   }
 
@@ -137,182 +88,49 @@ class _MetalScreenState extends State<MetalScreen> {
               Header(),
               SizedBox(height: defaultPadding),
               Container(
-                padding: EdgeInsets.all(defaultPadding),
-                decoration: BoxDecoration(
+                  padding: EdgeInsets.all(defaultPadding),
+                  decoration: BoxDecoration(
                     color: secondaryColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("조회기간", style: TextStyle(color: dimColor)),
-                        SizedBox(
-                          child: Row(
-                            children: [
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                      "${DateFormat('yyyy-MM').format(_startDate)}"),
-                                  IconButton(
-                                      color: Colors.white,
-                                      onPressed: () =>
-                                          _selectStartDate(context),
-                                      icon: Icon(Icons.calendar_month))
-                                ],
-                              ),
-                              Text("~"),
-                              SizedBox(width: defaultPadding / 2),
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                      "${DateFormat('yyyy-MM').format(_endDate)}"),
-                                  IconButton(
-                                      color: Colors.white,
-                                      onPressed: () => _selectEndDate(context),
-                                      icon: Icon(Icons.calendar_month))
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Row(children: [
+                    SearchSection(
+                        startDate: _startDate,
+                        endDate: _endDate,
+                        onStartDatePressed: () => _selectStartDate(context),
+                        onEndDatePressed: () => _selectEndDate(context),
+                        isMonthly: true),
                     Spacer(),
                     ElevatedButton(
                         onPressed: () {
-                          filterDataByDate(_startDate, _endDate);
+                          setState(() {
+                            filteredData = SearchUtil().filterDataByDate(
+                                data, _startDate, _endDate, true);
+                          });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryColor,
-                            foregroundColor: Colors.white,
-                            padding: EdgeInsets.all(5),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5))),
-                        child: Text("검색"))
-                  ],
-                ),
-              ),
-              SizedBox(height: defaultPadding),
-              Container(
-                padding: EdgeInsets.all(defaultPadding),
-                decoration: BoxDecoration(
-                    color: secondaryColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SfCartesianChart(
-                          legend: Legend(isVisible: true),
-                          tooltipBehavior: TooltipBehavior(enable: true, color: bgColor,textStyle: TextStyle(color: Colors.white)),
-                          primaryXAxis: CategoryAxis(),
-                          series: <CartesianSeries>[
-                            SplineSeries<_MetalData, String>(
-                                name: "철근",
-                                dataSource: _getChartData(0),
-                                xValueMapper: (_MetalData data, _) => data.date,
-                                yValueMapper: (_MetalData data, _) =>
-                                    data.rebar),
-                            SplineSeries<_MetalData, String>(
-                                name: "철광석",
-                                dataSource: _getChartData(0),
-                                xValueMapper: (_MetalData data, _) => data.date,
-                                yValueMapper: (_MetalData data, _) =>
-                                    data.iron_ore),
-                            SplineSeries<_MetalData, String>(
-                                name: "유연탄",
-                                dataSource: _getChartData(0),
-                                xValueMapper: (_MetalData data, _) => data.date,
-                                yValueMapper: (_MetalData data, _) =>
-                                    data.bituminous_coal),
-                            SplineSeries<_MetalData, String>(
-                                name: "철스크랩",
-                                dataSource: _getChartData(0),
-                                xValueMapper: (_MetalData data, _) => data.date,
-                                yValueMapper: (_MetalData data, _) =>
-                                    data.scrap)
-                          ]),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: defaultPadding),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        downloadCSV();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorConstants.green,
+                          backgroundColor: primaryColor,
                           foregroundColor: Colors.white,
+                          padding: EdgeInsets.all(5),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5))),
-                      child: Text("엑셀 다운로드")),
-                ],
-              ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: Text(searchButtonLabel))
+                  ])),
               SizedBox(height: defaultPadding),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    decoration: BoxDecoration(
-                      color: secondaryColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: DataTable(
-                        columns: filteredData[0]
-                            .map((column) => DataColumn(
-                                  label: Text(column.toString()),
-                                ))
-                            .toList(),
-                        rows: filteredData
-                            .sublist(1)
-                            .map((row) => DataRow(
-                                cells: row
-                                    .map((cell) =>
-                                        DataCell(Text(cell.toString())))
-                                    .toList()))
-                            .toList()),
-                  )),
-                ],
-              )
+              ChartSection(data: filteredData),
+              SizedBox(height: defaultPadding),
+              ExcelDownloadButton(onPressed: () {
+                CSVUtil.downloadCSV(data, fileName);
+                DownloadSnackBar.showSnackBar(context);
+              }),
+              SizedBox(height: defaultPadding),
+              DataTableSection(filteredData: filteredData)
             ],
           ),
         ),
       ),
     );
   }
-
-  List<_MetalData> _getChartData(int index) {
-    List<_MetalData> seriesData = [];
-    DateFormat format = DateFormat('yyyy-MM');
-
-    for (int i = 1; i < filteredData.length; i++) {
-      dynamic date = filteredData[i][0];
-      dynamic rebar = filteredData[i][1];
-      dynamic iron_ore = filteredData[i][2];
-      dynamic bituminous_coal = filteredData[i][3];
-      dynamic scrap = filteredData[i][4];
-
-      seriesData.add(_MetalData(date.toString(), rebar.toDouble(),
-          iron_ore.toDouble(), bituminous_coal.toDouble(), scrap.toDouble()));
-    }
-
-    return seriesData;
-  }
-}
-
-class _MetalData {
-  _MetalData(
-      this.date, this.rebar, this.iron_ore, this.bituminous_coal, this.scrap);
-
-  final String date;
-  final double rebar;
-  final double iron_ore;
-  final double bituminous_coal;
-  final double scrap;
 }

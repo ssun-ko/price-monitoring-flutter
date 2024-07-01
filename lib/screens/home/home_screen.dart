@@ -1,7 +1,8 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:price/providers/daily_nometal_data_provider.dart';
+import 'package:price/core/constants/string_constants.dart';
+import 'package:price/providers/data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
 import 'package:price/providers/menu_provider.dart';
 import 'package:price/responsive.dart';
@@ -10,9 +11,6 @@ import 'package:price/screens/analytics/nometal_screen.dart';
 import 'package:price/screens/analytics/oil_screen.dart';
 import 'package:price/screens/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../../providers/daily_oil_data_provider.dart';
-import '../../providers/monthly_metal_data_provider.dart';
 import 'components/side_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,29 +20,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void _loadMonthlyMetalCSV() async {
-    final rawData = await rootBundle.loadString("data/monthly_metal_data.csv");
+    final rawData = await rootBundle.loadString(metalFilePath);
     List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
-      context.read<MonthlyMetalDataProvider>().readData(listData);
+      context.read<DataProvider>().readMetalData(listData);
     });
   }
 
   void _loadDailyNometalCSV() async {
-    final rawData = await rootBundle.loadString("data/daily_nometal_data.csv");
+    final rawData = await rootBundle.loadString(nometalFilePath);
     List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
-      context.read<DailyNometalDataProvider>().readData(listData);
+      context.read<DataProvider>().readNometalData(listData);
     });
   }
 
   void _loadDailyOilCSV() async {
-    final rawData = await rootBundle.loadString("data/daily_oil_data.csv");
+    final rawData = await rootBundle.loadString(oilFilePath);
     List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
-      context.read<DailyOilDataProvider>().readData(listData);
+      context.read<DataProvider>().readOilData(listData);
     });
   }
 
