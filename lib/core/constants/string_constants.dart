@@ -8,3 +8,5 @@ const fileName = "data";
 const metalFilePath = "data/monthly_metal_data.csv";
 const nometalFilePath = "data/daily_nometal_data.csv";
 const oilFilePath = "data/daily_oil_data.csv";
+
+const updateDateMessage = "최종 업데이트 시간: ";
