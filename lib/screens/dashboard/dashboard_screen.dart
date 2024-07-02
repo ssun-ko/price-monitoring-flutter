@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/responsive.dart';
-
+import 'package:price/screens/dashboard/components/detail_widget.dart';
+import 'package:price/screens/dashboard/components/oil_widget.dart';
 import 'package:price/screens/dashboard/components/recent_forums.dart';
-import 'package:flutter/material.dart';
 
 import 'components/header.dart';
 
@@ -17,6 +18,8 @@ class DashboardScreen extends StatelessWidget {
             children: [
               Header(),
               SizedBox(height: defaultPadding),
+              DetailWidget(),
+              SizedBox(height: defaultPadding),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -29,19 +32,16 @@ class DashboardScreen extends StatelessWidget {
                         RecentDiscussions(),
                         if (!Responsive.isDesktop(context))
                           SizedBox(height: defaultPadding),
-                        if (!Responsive.isDesktop(context)) RecentDiscussions(),
+                        if (!Responsive.isDesktop(context)) OilWidget(),
                       ],
                     ),
                   ),
                   if (Responsive.isDesktop(context))
                     SizedBox(width: defaultPadding),
                   if (Responsive.isDesktop(context))
-                    Expanded(
-                      flex: 2,
-                      child: RecentDiscussions(),
-                    )
+                    Expanded(flex: 2, child: OilWidget()),
                 ],
-              )
+              ),
             ],
           ),
         ),

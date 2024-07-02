@@ -11,6 +11,17 @@ const dimColor = Colors.white54;
 const defaultPadding = 16.0;
 const double defaultBorderRadius = 15;
 
+const List<Color> rainbowColors = [
+  Color(0xD1ACF6),
+  Color(0xDD4D4D),
+  Color(0xD6834F),
+  Color(0xECA539),
+  Color(0x87AA66),
+  Color(0x88ABAD),
+  Color(0x4CB3D2),
+  Color(0x69C6FF)
+];
+
 class ColorConstants {
   static Color blue = Colors.blue;
   static Color green = Colors.green;

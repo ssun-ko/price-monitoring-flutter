@@ -10,3 +10,8 @@ const nometalFilePath = "data/daily_nometal_data.csv";
 const oilFilePath = "data/daily_oil_data.csv";
 
 const updateDateMessage = "최종 업데이트 시간: ";
+
+const oilWidgetTitle = "오늘의 유가 정보";
+
+const dailyWidgetLabel = "일간";
+const monthlyWidgetLabel = "월간";

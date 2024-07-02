@@ -1,6 +1,6 @@
 class ChartData {
-  ChartData(this.date, this.values);
+  ChartData(this.x, this.y);
 
-  final String date;
-  final Map<String, double> values;
+  final String x;
+  final Map<String, double> y;
 }

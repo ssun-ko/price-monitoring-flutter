@@ -43,8 +43,8 @@ class ChartSection extends StatelessWidget {
         SplineSeries<ChartData, String>(
           name: seriesName,
           dataSource: _getChartData(i),
-          xValueMapper: (ChartData data, _) => data.date,
-          yValueMapper: (ChartData data, _) => data.values[seriesName] ?? 0,
+          xValueMapper: (ChartData data, _) => data.x,
+          yValueMapper: (ChartData data, _) => data.y[seriesName] ?? 0,
         ),
       );
     }
@@ -56,14 +56,14 @@ class ChartSection extends StatelessWidget {
     List<ChartData> seriesData = [];
 
     for (int i = 1; i < data.length; i++) {
-      String date = data[i][0].toString();
-      Map<String, double> values = {};
+      String x = data[i][0].toString();
+      Map<String, double> y = {};
 
       for (int j = 1; j < data[i].length; j++) {
-        values[data[0][j]] = double.tryParse(data[i][j].toString()) ?? 0.0;
+        y[data[0][j]] = double.tryParse(data[i][j].toString()) ?? 0.0;
       }
 
-      seriesData.add(ChartData(date, values));
+      seriesData.add(ChartData(x, y));
     }
 
     return seriesData;

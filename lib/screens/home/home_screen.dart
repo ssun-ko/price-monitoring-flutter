@@ -64,14 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
         key: context.read<DrawerProvider>().scaffoldKey,
         drawer: SideMenu(),
         body: SafeArea(
-            child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
-              SizedBox(width: 250, child: SideMenu()),
-            Expanded(child: _buildScreen(context.watch<MenuProvider>().menu))
-          ]
-        )));
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          if (Responsive.isDesktop(context))
+            SizedBox(width: 250, child: SideMenu()),
+          Expanded(child: _buildScreen(context.watch<MenuProvider>().menu))
+        ])));
   }
 
   Widget _buildScreen(int menu) {
