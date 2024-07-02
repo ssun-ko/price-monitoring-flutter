@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:price/core/constants/color_constants.dart';
+import 'package:price/providers/drawer_provider.dart';
 import 'package:price/providers/menu_provider.dart';
+import 'package:price/responsive.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -29,6 +31,8 @@ class SideMenu extends StatelessWidget {
                   context.watch<MenuProvider>().menu == 1 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(1);
+                if (Responsive.isMobile(context))
+                  context.read<DrawerProvider>().closeDrawer();
               },
             ),
             DrawerListTile(
@@ -38,6 +42,8 @@ class SideMenu extends StatelessWidget {
                   context.watch<MenuProvider>().menu == 2 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(2);
+                if (Responsive.isMobile(context))
+                  context.read<DrawerProvider>().closeDrawer();
               },
             ),
             DrawerListTile(
@@ -47,6 +53,8 @@ class SideMenu extends StatelessWidget {
                   context.watch<MenuProvider>().menu == 3 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(3);
+                if (Responsive.isMobile(context))
+                  context.read<DrawerProvider>().closeDrawer();
               },
             ),
             DrawerListTile(
@@ -56,6 +64,8 @@ class SideMenu extends StatelessWidget {
                   context.watch<MenuProvider>().menu == 4 ? true : false,
               press: () {
                 context.read<MenuProvider>().changeMenu(4);
+                if (Responsive.isMobile(context))
+                  context.read<DrawerProvider>().closeDrawer();
               },
             )
           ],

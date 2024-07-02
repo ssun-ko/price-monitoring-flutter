@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:price/core/constants/color_constants.dart';
 import 'package:price/core/constants/string_constants.dart';
 import 'package:price/providers/data_provider.dart';
 import 'package:price/providers/drawer_provider.dart';
@@ -50,7 +51,8 @@ class _HeaderState extends State<Header> {
               icon: Icon(Icons.menu),
               onPressed: context.read<DrawerProvider>().openDrawer),
         Spacer(),
-        Text(updateDateMessage + getUpdateTime())
+        Text(updateDateMessage + getUpdateTime()),
+        SizedBox(width: defaultPadding)
       ],
     );
   }

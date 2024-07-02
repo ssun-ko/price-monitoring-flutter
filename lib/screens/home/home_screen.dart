@@ -11,6 +11,7 @@ import 'package:price/screens/analytics/nometal_screen.dart';
 import 'package:price/screens/analytics/oil_screen.dart';
 import 'package:price/screens/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
+
 import 'components/side_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +22,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void _loadMonthlyMetalCSV() async {
     final rawData = await rootBundle.loadString(metalFilePath);
-    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
+    List<List<dynamic>> listData =
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readMetalData(listData);
@@ -30,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadDailyNometalCSV() async {
     final rawData = await rootBundle.loadString(nometalFilePath);
-    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
+    List<List<dynamic>> listData =
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readNometalData(listData);
@@ -39,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadDailyOilCSV() async {
     final rawData = await rootBundle.loadString(oilFilePath);
-    List<List<dynamic>> listData = const CsvToListConverter(eol: '\n').convert(rawData);
+    List<List<dynamic>> listData =
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readOilData(listData);
@@ -57,25 +61,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<DrawerProvider>().scaffoldKey,
-      drawer: SideMenu(),
-      body: SafeArea(
-        child: Row(
+        key: context.read<DrawerProvider>().scaffoldKey,
+        drawer: SideMenu(),
+        body: SafeArea(
+            child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (Responsive.isDesktop(context)) Expanded(child: SideMenu()),
-            Expanded(
-                flex: 7,
-                child: context.watch<MenuProvider>().menu == 1
-                    ? DashboardScreen()
-                    : context.watch<MenuProvider>().menu == 2
-                        ? MetalScreen()
-                        : context.watch<MenuProvider>().menu == 3
-                            ? NometalScreen()
-                            : OilScreen()),
-          ],
-        ),
-      ),
-    );
+            if (Responsive.isDesktop(context))
+              SizedBox(width: 250, child: SideMenu()),
+            Expanded(child: _buildScreen(context.watch<MenuProvider>().menu))
+          ]
+        )));
+  }
+
+  Widget _buildScreen(int menu) {
+    switch (menu) {
+      case 1:
+        return DashboardScreen();
+      case 2:
+        return MetalScreen();
+      case 3:
+        return NometalScreen();
+      default:
+        return OilScreen();
+    }
   }
 }
