@@ -19,7 +19,7 @@ class MetalScreen extends StatefulWidget {
 }
 
 class _MetalScreenState extends State<MetalScreen> {
-  DateTime _startDate = new DateTime(2011, 1, 1);
+  DateTime _startDate = new DateTime(2011, 7, 1);
   DateTime _endDate = DateTime.now();
 
   List<List<dynamic>> data = [];
