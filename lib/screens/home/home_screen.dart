@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _loadMonthlyMetalCSV() async {
     final rawData = await rootBundle.loadString(metalFilePath);
     List<List<dynamic>> listData =
-        const CsvToListConverter().convert(rawData);
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readMetalData(listData);
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _loadDailyNometalCSV() async {
     final rawData = await rootBundle.loadString(nometalFilePath);
     List<List<dynamic>> listData =
-        const CsvToListConverter().convert(rawData);
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readNometalData(listData);
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _loadDailyOilCSV() async {
     final rawData = await rootBundle.loadString(oilFilePath);
     List<List<dynamic>> listData =
-        const CsvToListConverter().convert(rawData);
+        const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
       context.read<DataProvider>().readOilData(listData);
