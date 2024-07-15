@@ -36,7 +36,7 @@ class _MetalScreenState extends State<MetalScreen> {
         locale: const Locale('ko', 'KR'),
         context: context,
         initialDate: _startDate,
-        firstDate: DateTime(2011, 7),
+        firstDate: _startDate,
         lastDate: DateTime(2026, 12));
 
     if (startDate != null && startDate != _startDate) {
