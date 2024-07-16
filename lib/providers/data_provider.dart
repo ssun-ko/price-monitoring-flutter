@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 class DataProvider extends ChangeNotifier {
   List<List<dynamic>> _metalData = [];
+
   List<List<dynamic>> get metalData => _metalData;
 
-  List<List<dynamic>> _nometalData = [];
-  List<List<dynamic>> get nometalData => _nometalData;
+  List<List<dynamic>> _noMetalData = [];
+
+  List<List<dynamic>> get noMetalData => _noMetalData;
 
   List<List<dynamic>> _oilData = [];
+
   List<List<dynamic>> get oilData => _oilData;
 
   void readMetalData(List<List<dynamic>> data) {
@@ -15,8 +18,8 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void readNometalData(List<List<dynamic>> data) {
-    _nometalData = data;
+  void readNoMetalData(List<List<dynamic>> data) {
+    _noMetalData = data;
     notifyListeners();
   }
 

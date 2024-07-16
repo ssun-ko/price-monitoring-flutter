@@ -14,12 +14,12 @@ import 'package:price/screens/analytics/components/search_section.dart';
 import 'package:price/screens/dashboard/components/header.dart';
 import 'package:provider/provider.dart';
 
-class NometalScreen extends StatefulWidget {
+class NoMetalScreen extends StatefulWidget {
   @override
-  _NometalScreenState createState() => _NometalScreenState();
+  _NoMetalScreenState createState() => _NoMetalScreenState();
 }
 
-class _NometalScreenState extends State<NometalScreen> {
+class _NoMetalScreenState extends State<NoMetalScreen> {
   DateTime _startDate = DateTime(DateTime.now().year, DateTime.now().month, 1);
   DateTime _endDate = DateTime.now();
 
@@ -72,7 +72,7 @@ class _NometalScreenState extends State<NometalScreen> {
   void initState() {
     super.initState();
     setState(() {
-      data = context.read<DataProvider>().nometalData;
+      data = context.read<DataProvider>().noMetalData;
       filteredData =
           SearchUtil().filterDataByDate(data, _startDate, _endDate, false);
     });

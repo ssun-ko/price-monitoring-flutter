@@ -7,7 +7,7 @@ import 'package:price/providers/drawer_provider.dart';
 import 'package:price/providers/menu_provider.dart';
 import 'package:price/responsive.dart';
 import 'package:price/screens/analytics/metal_screen.dart';
-import 'package:price/screens/analytics/nometal_screen.dart';
+import 'package:price/screens/analytics/no_metal_screen.dart';
 import 'package:price/screens/analytics/oil_screen.dart';
 import 'package:price/screens/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _loadDailyNometalCSV() async {
-    final rawData = await rootBundle.loadString(nometalFilePath);
+  void _loadDailyNoMetalCSV() async {
+    final rawData = await rootBundle.loadString(noMetalFilePath);
     List<List<dynamic>> listData =
         const CsvToListConverter(eol: '\n').convert(rawData);
 
     setState(() {
-      context.read<DataProvider>().readNometalData(listData);
+      context.read<DataProvider>().readNoMetalData(listData);
     });
   }
 
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _loadMonthlyMetalCSV();
-    _loadDailyNometalCSV();
+    _loadDailyNoMetalCSV();
     _loadDailyOilCSV();
   }
 
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 2:
         return MetalScreen();
       case 3:
-        return NometalScreen();
+        return NoMetalScreen();
       default:
         return OilScreen();
     }

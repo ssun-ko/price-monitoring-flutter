@@ -15,7 +15,7 @@ class DetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(builder: (context, dataProvider, _) {
       if (dataProvider.metalData.isEmpty ||
-          dataProvider.nometalData.isEmpty ||
+          dataProvider.noMetalData.isEmpty ||
           dataProvider.oilData.isEmpty) {
         return Container(
           padding: EdgeInsets.all(defaultPadding),
@@ -86,13 +86,13 @@ class DetailCard extends StatelessWidget {
       case 1:
         return dataProvider.oilData[0][1].toString();
       case 2:
-        return dataProvider.nometalData[0][1].toString();
+        return dataProvider.noMetalData[0][1].toString();
       case 3:
-        return dataProvider.nometalData[0][2].toString();
+        return dataProvider.noMetalData[0][2].toString();
       case 4:
-        return dataProvider.nometalData[0][5].toString();
+        return dataProvider.noMetalData[0][5].toString();
       case 5:
-        return dataProvider.nometalData[0][6].toString();
+        return dataProvider.noMetalData[0][6].toString();
       default:
         return "";
     }
@@ -124,7 +124,7 @@ class DetailCard extends StatelessWidget {
         return seriesData;
       default:
         List<ChartData> seriesData = [];
-        List<dynamic> data = dataProvider.nometalData;
+        List<dynamic> data = dataProvider.noMetalData;
 
         // 최근 30일 데이터 조회, 데이터 30일 미만인 경우 전체
         int startIndex = data.length - 31;
@@ -180,13 +180,13 @@ class DetailCard extends StatelessWidget {
       case 1:
         return formatter.format(dataProvider.oilData.last[1]);
       case 2:
-        return formatter.format(dataProvider.nometalData.last[1]);
+        return formatter.format(dataProvider.noMetalData.last[1]);
       case 3:
-        return formatter.format(dataProvider.nometalData.last[2]);
+        return formatter.format(dataProvider.noMetalData.last[2]);
       case 4:
-        return formatter.format(dataProvider.nometalData.last[5]);
+        return formatter.format(dataProvider.noMetalData.last[5]);
       case 5:
-        return formatter.format(dataProvider.nometalData.last[6]);
+        return formatter.format(dataProvider.noMetalData.last[6]);
       default:
         return "0.0";
     }
@@ -196,18 +196,18 @@ class DetailCard extends StatelessWidget {
     Map<String, String> data = {};
     List<double> todayValues = [
       dataProvider.oilData.last[1],
-      dataProvider.nometalData.last[1],
-      dataProvider.nometalData.last[2],
-      dataProvider.nometalData.last[5],
-      dataProvider.nometalData.last[6],
+      dataProvider.noMetalData.last[1],
+      dataProvider.noMetalData.last[2],
+      dataProvider.noMetalData.last[5],
+      dataProvider.noMetalData.last[6],
     ];
 
     List<double> yesterdayValues = [
       dataProvider.oilData[dataProvider.oilData.length - 2][1],
-      dataProvider.nometalData[dataProvider.nometalData.length - 2][1],
-      dataProvider.nometalData[dataProvider.nometalData.length - 2][2],
-      dataProvider.nometalData[dataProvider.nometalData.length - 2][5],
-      dataProvider.nometalData[dataProvider.nometalData.length - 2][6],
+      dataProvider.noMetalData[dataProvider.noMetalData.length - 2][1],
+      dataProvider.noMetalData[dataProvider.noMetalData.length - 2][2],
+      dataProvider.noMetalData[dataProvider.noMetalData.length - 2][5],
+      dataProvider.noMetalData[dataProvider.noMetalData.length - 2][6],
     ];
 
     double todayValue = todayValues[cardNumber - 1];

@@ -1,5 +1,5 @@
-import 'package:price/core/constants/color_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:price/core/constants/color_constants.dart';
 
 class UserDetailsMiniCard extends StatelessWidget {
   const UserDetailsMiniCard({

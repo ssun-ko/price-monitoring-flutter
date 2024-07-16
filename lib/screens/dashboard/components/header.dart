@@ -24,8 +24,8 @@ class _HeaderState extends State<Header> {
         }
         break;
       case 3:
-        if (dataProvider.nometalData.isNotEmpty) {
-          return dataProvider.nometalData.last.first.toString();
+        if (dataProvider.noMetalData.isNotEmpty) {
+          return dataProvider.noMetalData.last.first.toString();
         }
         break;
       case 4:

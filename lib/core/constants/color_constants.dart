@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Colors.blue;
+const primaryColor = Colors.blueAccent;
 const tintColor = Colors.pink;
 
 const secondaryColor = Color(0xFF2B2D30);

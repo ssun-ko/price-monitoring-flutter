@@ -6,7 +6,7 @@ const downloadMessage = "파일이 다운로드됩니다.";
 const fileName = "data";
 
 const metalFilePath = "data/monthly_metal_data.csv";
-const nometalFilePath = "data/daily_nometal_data.csv";
+const noMetalFilePath = "data/daily_noMetal_data.csv";
 const oilFilePath = "data/daily_oil_data.csv";
 
 const updateDateMessage = "최종 업데이트 시간: ";

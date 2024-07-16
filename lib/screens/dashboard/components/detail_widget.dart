@@ -15,7 +15,7 @@ class DetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(builder: (context, dataProvider, _) {
       if (dataProvider.metalData.isEmpty ||
-          dataProvider.nometalData.isEmpty ||
+          dataProvider.noMetalData.isEmpty ||
           dataProvider.oilData.isEmpty) {
         return Container(
           padding: EdgeInsets.all(defaultPadding),
