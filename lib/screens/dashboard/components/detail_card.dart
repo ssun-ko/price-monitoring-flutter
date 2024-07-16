@@ -106,7 +106,7 @@ class DetailCard extends StatelessWidget {
   IconData _getWidgetIcon() {
     switch (cardNumber) {
       case 1:
-        return Icons.person_rounded;
+        return Icons.local_gas_station;
       case 2:
         return Icons.chat_bubble_rounded;
       case 3:
