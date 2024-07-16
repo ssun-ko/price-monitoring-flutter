@@ -108,13 +108,13 @@ class DetailCard extends StatelessWidget {
       case 1:
         return Icons.local_gas_station;
       case 2:
-        return Icons.chat_bubble_rounded;
+        return Icons.electrical_services;
       case 3:
-        return Icons.star_rounded;
+        return Icons.lightbulb;
       case 4:
-        return Icons.heart_broken_rounded;
+        return Icons.science;
       default:
-        return Icons.doorbell_rounded;
+        return Icons.kitchen;
     }
   }
 
