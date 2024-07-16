@@ -68,6 +68,7 @@ class ChartSection extends StatelessWidget {
       seriesData.add(ChartData(x, y));
     }
 
+    // 비철금속 차트는 Min-Max 스케일링 적용 (0 - 100%)
     if (menuId == 3) {
       for (int i = 1; i < data[0].length; i++) {
         String seriesName = data[0][i];
