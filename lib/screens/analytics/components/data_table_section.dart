@@ -45,9 +45,7 @@ class DataTableSection extends StatelessWidget {
     return filteredData.sublist(1).map((row) {
       return DataRow(
         cells: row.map((cell) {
-          return DataCell(
-            Text(cell.toString()),
-          );
+          return DataCell(Text(cell.toString()));
         }).toList(),
       );
     }).toList();

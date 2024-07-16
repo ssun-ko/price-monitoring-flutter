@@ -15,3 +15,5 @@ const oilWidgetTitle = "오늘의 유가 정보";
 
 const dailyWidgetLabel = "일간";
 const monthlyWidgetLabel = "월간";
+
+const minMaxScaleWarning = "⚠️ 비철금속 가격 변동을 보여주기 위해 Min-Max Scale을 적용한 그래프입니다.";

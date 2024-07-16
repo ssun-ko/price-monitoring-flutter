@@ -5,6 +5,7 @@ import 'package:price/core/themes/custom_datepicker_theme.dart';
 import 'package:price/core/utils/csv_util.dart';
 import 'package:price/core/utils/search_util.dart';
 import 'package:price/providers/data_provider.dart';
+import 'package:price/providers/menu_provider.dart';
 import 'package:price/screens/analytics/components/chart_section.dart';
 import 'package:price/screens/analytics/components/data_table_section.dart';
 import 'package:price/screens/analytics/components/download_snackbar.dart';
@@ -120,8 +121,11 @@ class _NometalScreenState extends State<NometalScreen> {
                 ),
               ),
               SizedBox(height: defaultPadding),
-              ChartSection(data: filteredData),
+              ChartSection(
+                  data: filteredData,
+                  menuId: context.watch<MenuProvider>().menu),
               SizedBox(height: defaultPadding),
+              Text(minMaxScaleWarning, style: TextStyle(color: dimColor)),
               ExcelDownloadButton(onPressed: () {
                 CSVUtil.downloadCSV(data, fileName);
                 DownloadSnackBar.showSnackBar(context);

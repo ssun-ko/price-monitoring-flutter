@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/providers/data_provider.dart';
 import 'package:price/screens/dashboard/components/widget_title.dart';
@@ -56,11 +57,35 @@ class DetailCard extends StatelessWidget {
                   WidgetTitle(title: _getWidgetTitle()),
                   Spacer(),
                   Text(_getWidgetLabel())
+                ]),
+                SizedBox(height: defaultPadding),
+                Row(children: [
+                  Text(_getTodayPrice(dataProvider),
+                      style: Theme.of(context).textTheme.titleLarge)
                 ])
               ])),
         );
       }
     });
+  }
+
+  String _getTodayPrice(DataProvider dataProvider) {
+    final formatter = NumberFormat('#,###');
+
+    switch (cardNumber) {
+      case 1:
+        return formatter.format(dataProvider.oilData.last[1]).toString();
+      case 2:
+        return formatter.format(dataProvider.nometalData.last[1]).toString();
+      case 3:
+        return formatter.format(dataProvider.nometalData.last[2]).toString();
+      case 4:
+        return formatter.format(dataProvider.nometalData.last[5]).toString();
+      case 5:
+        return formatter.format(dataProvider.nometalData.last[6]).toString();
+      default:
+        return "0.0";
+    }
   }
 
   Color _getWidgetIconColor() {
@@ -94,14 +119,7 @@ class DetailCard extends StatelessWidget {
   }
 
   String _getWidgetLabel() {
-    switch (cardNumber) {
-      case 1:
-      case 2:
-      case 3:
-        return "일간";
-      default:
-        return "월간";
-    }
+    return "일간";
   }
 
   String _getWidgetTitle() {
@@ -113,9 +131,9 @@ class DetailCard extends StatelessWidget {
       case 3:
         return "알루미늄";
       case 4:
-        return "철근";
+        return "니켈";
       case 5:
-        return "철광석";
+        return "주석";
       default:
         return "";
     }

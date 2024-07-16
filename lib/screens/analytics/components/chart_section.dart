@@ -5,8 +5,10 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ChartSection extends StatelessWidget {
   final List<List<dynamic>> data;
+  final int menuId;
 
-  const ChartSection({Key? key, required this.data}) : super(key: key);
+  const ChartSection({Key? key, required this.data, required this.menuId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class ChartSection extends StatelessWidget {
       seriesList.add(
         SplineSeries<ChartData, String>(
           name: seriesName,
-          dataSource: _getChartData(i),
+          dataSource: _getChartData(),
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y[seriesName] ?? 0,
         ),
@@ -52,7 +54,7 @@ class ChartSection extends StatelessWidget {
     return seriesList;
   }
 
-  List<ChartData> _getChartData(int index) {
+  List<ChartData> _getChartData() {
     List<ChartData> seriesData = [];
 
     for (int i = 1; i < data.length; i++) {
@@ -64,6 +66,26 @@ class ChartSection extends StatelessWidget {
       }
 
       seriesData.add(ChartData(x, y));
+    }
+
+    if (menuId == 3) {
+      for (int i = 1; i < data[0].length; i++) {
+        String seriesName = data[0][i];
+        double minY = 10000000000;
+        double maxY = 0;
+
+        for (int j = 0; j < seriesData.length; j++) {
+          if (seriesData[j].y[seriesName]! < minY)
+            minY = seriesData[j].y[seriesName]!;
+          if (seriesData[j].y[seriesName]! > maxY)
+            maxY = seriesData[j].y[seriesName]!;
+        }
+
+        for (int j = 0; j < seriesData.length; j++) {
+          seriesData[j].y[seriesName] =
+              (seriesData[j].y[seriesName]! - minY) / (maxY - minY) * 100;
+        }
+      }
     }
 
     return seriesData;
