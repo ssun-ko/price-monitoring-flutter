@@ -74,15 +74,19 @@ class DetailCard extends StatelessWidget {
 
     switch (cardNumber) {
       case 1:
-        return formatter.format(dataProvider.oilData.last[1]).toString();
+        return formatter.format(dataProvider.oilData.last[1]).toString() + "\u20A9/L";
       case 2:
-        return formatter.format(dataProvider.nometalData.last[1]).toString();
+        return formatter.format(dataProvider.nometalData.last[1]).toString() + "$/ton";
       case 3:
-        return formatter.format(dataProvider.nometalData.last[2]).toString();
+        return formatter.format(dataProvider.nometalData.last[2]).toString() + "$/ton";
       case 4:
-        return formatter.format(dataProvider.nometalData.last[5]).toString();
+        return formatter.format(dataProvider.nometalData.last[3]).toString() + "$/ton";
       case 5:
-        return formatter.format(dataProvider.nometalData.last[6]).toString();
+        return formatter.format(dataProvider.nometalData.last[4]).toString() + "$/ton";
+      case 6:
+        return formatter.format(dataProvider.nometalData.last[5]).toString() + "$/ton";
+      case 7:
+        return formatter.format(dataProvider.nometalData.last[6]).toString() + "$/ton";
       default:
         return "0.0";
     }
@@ -90,14 +94,20 @@ class DetailCard extends StatelessWidget {
 
   Color _getWidgetIconColor() {
     switch (cardNumber) {
-      case 1:
-        return Colors.lightBlueAccent;
-      case 2:
-        return Colors.deepPurpleAccent;
-      case 3:
-        return Colors.yellowAccent;
-      case 4:
-        return Colors.redAccent;
+      case 1: // 유가
+        return Colors.orangeAccent;
+      case 2: // 구리
+        return Colors.brown;
+      case 3: // 알루미늄
+        return Colors.blueGrey;
+      case 4: // 아연
+        return Colors.blueAccent;
+      case 5: // 납
+        return Colors.grey;
+      case 6: // 니켈
+        return Colors.green;
+      case 7: // 주석
+        return Colors.deepOrange;
       default:
         return Colors.lightGreenAccent;
     }
@@ -105,14 +115,20 @@ class DetailCard extends StatelessWidget {
 
   IconData _getWidgetIcon() {
     switch (cardNumber) {
-      case 1:
+      case 1: // 유가
         return Icons.local_gas_station;
-      case 2:
-        return Icons.electrical_services;
-      case 3:
-        return Icons.lightbulb;
-      case 4:
+      case 2: // 구리
+        return Icons.cable;
+      case 3: // 알루미늄
+        return Icons.ac_unit;
+      case 4: // 아연
         return Icons.science;
+      case 5: // 납
+        return Icons.battery_alert;
+      case 6: // 니켈
+        return Icons.build;
+      case 7: // 주석
+        return Icons.extension;
       default:
         return Icons.kitchen;
     }
@@ -131,8 +147,12 @@ class DetailCard extends StatelessWidget {
       case 3:
         return "알루미늄";
       case 4:
-        return "니켈";
+        return "아연";
       case 5:
+        return "납";
+      case 6:
+        return "니켈";
+      case 7:
         return "주석";
       default:
         return "";
