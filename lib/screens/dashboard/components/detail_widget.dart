@@ -29,7 +29,7 @@ class DetailWidget extends StatelessWidget {
         );
       } else {
         return Container(
-          height: 200,
+          height: 150,
           child: Row(children: [
             DetailCard(cardNumber: 1),
             SizedBox(width: defaultPadding),
@@ -40,6 +40,10 @@ class DetailWidget extends StatelessWidget {
             DetailCard(cardNumber: 4),
             SizedBox(width: defaultPadding),
             DetailCard(cardNumber: 5),
+            SizedBox(width: defaultPadding),
+            DetailCard(cardNumber: 6),
+            SizedBox(width: defaultPadding),
+            DetailCard(cardNumber: 7),
           ]),
         );
       }

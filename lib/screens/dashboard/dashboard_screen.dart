@@ -24,7 +24,7 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 7,
+                    flex: 5,
                     child: Column(
                       children: [
                         RecentDiscussions(),
