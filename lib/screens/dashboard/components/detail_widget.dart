@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/providers/data_provider.dart';
+import 'package:price/responsive.dart';
 import 'package:price/screens/dashboard/components/detail_card.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class DetailWidget extends StatelessWidget {
             child: CircularProgressIndicator(),
           ),
         );
-      } else {
+      } else if (!Responsive.isMobile(context)) {
         return Container(
           child: Row(children: [
             DetailCard(cardNumber: 1),
@@ -41,6 +42,20 @@ class DetailWidget extends StatelessWidget {
             DetailCard(cardNumber: 5)
           ]),
         );
+      } else {
+        return Container(
+          height: 1000,
+            child: Column(children: [
+          DetailCard(cardNumber: 1),
+          SizedBox(height: defaultPadding),
+          DetailCard(cardNumber: 2),
+          SizedBox(height: defaultPadding),
+          DetailCard(cardNumber: 3),
+          SizedBox(height: defaultPadding),
+          DetailCard(cardNumber: 4),
+          SizedBox(height: defaultPadding),
+          DetailCard(cardNumber: 5)
+        ]));
       }
     });
   }
