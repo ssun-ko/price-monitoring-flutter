@@ -33,7 +33,7 @@ class DetailCard extends StatelessWidget {
       } else {
         return Expanded(
           child: Container(
-              height: 200,
+              height: 150,
               padding: EdgeInsets.all(defaultPadding),
               decoration: BoxDecoration(
                 color: secondaryColor,
@@ -74,19 +74,19 @@ class DetailCard extends StatelessWidget {
 
     switch (cardNumber) {
       case 1:
-        return formatter.format(dataProvider.oilData.last[1]).toString() + "\u20A9/L";
+        return formatter.format(dataProvider.oilData.last[1]).toString() + " \u20A9/L";
       case 2:
-        return formatter.format(dataProvider.nometalData.last[1]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[1]).toString() + " \$/ton";
       case 3:
-        return formatter.format(dataProvider.nometalData.last[2]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[2]).toString() + " \$/ton";
       case 4:
-        return formatter.format(dataProvider.nometalData.last[3]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[3]).toString() + " \$/ton";
       case 5:
-        return formatter.format(dataProvider.nometalData.last[4]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[4]).toString() + " \$/ton";
       case 6:
-        return formatter.format(dataProvider.nometalData.last[5]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[5]).toString() + " \$/ton";
       case 7:
-        return formatter.format(dataProvider.nometalData.last[6]).toString() + "\$/ton";
+        return formatter.format(dataProvider.nometalData.last[6]).toString() + " \$/ton";
       default:
         return "0.0";
     }
