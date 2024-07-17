@@ -51,15 +51,20 @@ class MetalWidget extends StatelessWidget {
                           color: Colors.grey,
                           dataSource: _getChartData(dataProvider.metalData),
                           xValueMapper: (ChartData2 data, _) => data.x,
-                          yValueMapper: (ChartData2 data, _) => data.y,
-                          name: '이번달'),
+                          yValueMapper: (ChartData2 data, _) => data.y2,
+                          name: dataProvider
+                              .metalData[dataProvider.metalData.length - 2][0]
+                              .toString()
+                              .substring(0, 7)),
                       ColumnSeries<ChartData2, String>(
                           spacing: 0.1,
                           color: Colors.blueGrey,
                           dataSource: _getChartData(dataProvider.metalData),
                           xValueMapper: (ChartData2 data, _) => data.x,
-                          yValueMapper: (ChartData2 data, _) => data.y2,
-                          name: '지난달')
+                          yValueMapper: (ChartData2 data, _) => data.y,
+                          name: dataProvider.metalData.last[0]
+                              .toString()
+                              .substring(0, 7))
                     ]),
               )
             ],
