@@ -69,8 +69,6 @@ class DollarWidget extends StatelessWidget {
 
     for (int i = 1; i < data[0].length; i++) {
       String seriesName = data[0][i];
-      print("i");
-      print(seriesName);
       seriesList.add(
         AreaSeries<ChartData, String>(
           gradient: gradientColors,

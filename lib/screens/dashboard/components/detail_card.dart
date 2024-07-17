@@ -71,6 +71,12 @@ class DetailCard extends StatelessWidget {
     return Expanded(
         child: SfCartesianChart(
             legend: Legend(isVisible: false),
+            tooltipBehavior: TooltipBehavior(
+              decimalPlaces: 0,
+              enable: true,
+              color: bgColor,
+              textStyle: TextStyle(color: Colors.white)
+            ),
             plotAreaBorderColor: Colors.transparent,
             primaryXAxis: CategoryAxis(isVisible: false),
             primaryYAxis: NumericAxis(isVisible: false),

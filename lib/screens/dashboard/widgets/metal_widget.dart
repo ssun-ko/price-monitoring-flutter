@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/core/constants/string_constants.dart';
-import 'package:price/models/chart_data_model.dart';
+import 'package:price/models/chart_data_model2.dart';
 import 'package:price/providers/data_provider.dart';
 import 'package:price/screens/dashboard/components/widget_title.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,7 @@ class MetalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(builder: (context, dataProvider, _) {
-      if (dataProvider.dollarData.isEmpty) {
+      if (dataProvider.metalData.isEmpty) {
         return Container(
             padding: EdgeInsets.all(defaultPadding),
             decoration: BoxDecoration(
@@ -34,18 +34,33 @@ class MetalWidget extends StatelessWidget {
                 height: 278,
                 width: double.infinity,
                 child: SfCartesianChart(
-                  legend: Legend(isVisible: false),
-                  plotAreaBorderColor: Colors.transparent,
-                  tooltipBehavior: TooltipBehavior(
-                    enable: true,
-                    color: bgColor,
-                    textStyle: TextStyle(color: Colors.white),
-                  ),
-                  margin: EdgeInsets.zero,
-                  primaryXAxis: CategoryAxis(),
-                  primaryYAxis: NumericAxis(isVisible: false),
-                  series: _buildSeries(dataProvider.dollarData)
-                ),
+                    legend: Legend(isVisible: true),
+                    plotAreaBorderColor: Colors.transparent,
+                    tooltipBehavior: TooltipBehavior(
+                        decimalPlaces: 2,
+                        format: 'point.y',
+                        enable: true,
+                        color: bgColor,
+                        textStyle: TextStyle(color: Colors.white)),
+                    margin: EdgeInsets.zero,
+                    primaryXAxis: CategoryAxis(),
+                    primaryYAxis: NumericAxis(isVisible: false),
+                    series: <ColumnSeries>[
+                      ColumnSeries<ChartData2, String>(
+                          spacing: 0.1,
+                          color: Colors.grey,
+                          dataSource: _getChartData(dataProvider.metalData),
+                          xValueMapper: (ChartData2 data, _) => data.x,
+                          yValueMapper: (ChartData2 data, _) => data.y,
+                          name: '이번달'),
+                      ColumnSeries<ChartData2, String>(
+                          spacing: 0.1,
+                          color: Colors.blueGrey,
+                          dataSource: _getChartData(dataProvider.metalData),
+                          xValueMapper: (ChartData2 data, _) => data.x,
+                          yValueMapper: (ChartData2 data, _) => data.y2,
+                          name: '지난달')
+                    ]),
               )
             ],
           ),
@@ -54,43 +69,16 @@ class MetalWidget extends StatelessWidget {
     });
   }
 
-  List<CartesianSeries<dynamic, String>> _buildSeries(
-      List<List<dynamic>> data) {
-    List<CartesianSeries<dynamic, String>> seriesList = [];
+  List<ChartData2> _getChartData(List<List<dynamic>> data) {
+    List<ChartData2> seriesData = [];
 
-    for (int i = 1; i < data[0].length; i++) {
-      String seriesName = data[0][i];
-      print("i");
-      print(seriesName);
-      seriesList.add(
-        AreaSeries<ChartData, String>(
-          color: Colors.grey.withOpacity(0.2),
-          borderDrawMode: BorderDrawMode.top,
-          borderColor: Colors.grey,
-          name: seriesName,
-          dataSource: _getChartData(data, i),
-          xValueMapper: (ChartData data, _) => data.x,
-          yValueMapper: (ChartData data, _) => data.y[seriesName] ?? 0,
-        ),
-      );
-    }
+    for (int i = 1; i < data.last.length; i++) {
+      String x = data[0][i].toString();
 
-    return seriesList;
-  }
+      double y = double.tryParse(data.last[i].toString()) ?? 0.0;
+      double y2 = double.tryParse(data[data.length - 2][i].toString()) ?? 0.0;
 
-  List<ChartData> _getChartData(List<List<dynamic>> data, int index) {
-    List<ChartData> seriesData = [];
-
-    // 최근 30일 데이터 조회, 데이터 30일 미만인 경우 전체
-    int startIndex = data.length - 30;
-    startIndex = startIndex < 0 ? 1 : startIndex;
-
-    for (int i = startIndex; i < data.length; i++) {
-      String x = data[i][0].toString();
-      Map<String, double> y = {};
-
-      y[data[0][1]] = double.tryParse(data[i][1].toString()) ?? 0.0;
-      seriesData.add(ChartData(x, y));
+      seriesData.add(ChartData2(x, y, y2));
     }
     return seriesData;
   }
