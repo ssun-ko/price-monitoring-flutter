@@ -107,7 +107,7 @@ class DetailCard extends StatelessWidget {
         List<dynamic> data = dataProvider.oilData;
 
         // 최근 30일 데이터 조회, 데이터 30일 미만인 경우 전체
-        int startIndex = data.length - 31;
+        int startIndex = data.length - 30;
         startIndex = startIndex < 0 ? 1 : startIndex;
 
         for (int i = startIndex; i < data.length; i++) {
@@ -127,7 +127,7 @@ class DetailCard extends StatelessWidget {
         List<dynamic> data = dataProvider.noMetalData;
 
         // 최근 30일 데이터 조회, 데이터 30일 미만인 경우 전체
-        int startIndex = data.length - 31;
+        int startIndex = data.length - 30;
         startIndex = startIndex < 0 ? 1 : startIndex;
 
         for (int i = startIndex; i < data.length; i++) {

@@ -8,10 +8,12 @@ const fileName = "data";
 const metalFilePath = "data/monthly_metal_data.csv";
 const noMetalFilePath = "data/daily_no_metal_data.csv";
 const oilFilePath = "data/daily_oil_data.csv";
+const dollarFilePath = "data/dollar_won_rate_data.csv";
 
 const updateDateMessage = "최종 업데이트 시간: ";
 
 const oilWidgetTitle = "오늘의 유가 정보";
+const dollarWidgetTitle = "최근 30일 원달러 환율";
 
 const dailyWidgetLabel = "일간";
 const monthlyWidgetLabel = "월간";

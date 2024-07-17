@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/responsive.dart';
-import 'package:price/screens/dashboard/components/detail_widget.dart';
-import 'package:price/screens/dashboard/components/oil_widget.dart';
+import 'package:price/screens/dashboard/widgets/detail_widget.dart';
+import 'package:price/screens/dashboard/widgets/dollar_widget.dart';
+import 'package:price/screens/dashboard/widgets/oil_widget.dart';
 import 'package:price/screens/dashboard/components/recent_forums.dart';
 
 import 'components/header.dart';
@@ -27,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
                     flex: 965,
                     child: Column(
                       children: [
-                        RecentDiscussions(),
+                        DollarWidget(),
                         SizedBox(height: defaultPadding),
                         RecentDiscussions(),
                         if (!Responsive.isDesktop(context))

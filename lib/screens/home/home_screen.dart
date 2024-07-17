@@ -50,12 +50,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _loadDollarCSV() async {
+    final rawData = await rootBundle.loadString(dollarFilePath);
+    List<List<dynamic>> listData =
+        const CsvToListConverter(eol: '\n').convert(rawData);
+
+    setState(() {
+      context.read<DataProvider>().readDollarData(listData);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _loadMonthlyMetalCSV();
     _loadDailyNoMetalCSV();
     _loadDailyOilCSV();
+    _loadDollarCSV();
   }
 
   @override
