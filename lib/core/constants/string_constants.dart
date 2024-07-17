@@ -15,5 +15,3 @@ const oilWidgetTitle = "오늘의 유가 정보";
 
 const dailyWidgetLabel = "일간";
 const monthlyWidgetLabel = "월간";
-
-const minMaxScaleWarning = "⚠️ 가격 변동을 확인을 위해 Min-Max Scale 적용 그래프";
