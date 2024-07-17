@@ -7,7 +7,7 @@ import 'package:price/screens/dashboard/components/widget_title.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class DollarWidget extends StatelessWidget {
+class MetalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(builder: (context, dataProvider, _) {
@@ -29,9 +29,9 @@ class DollarWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              WidgetTitle(title: dollarWidgetTitle),
+              WidgetTitle(title: metalWidgetTitle),
               SizedBox(
-                height: 250,
+                height: 278,
                 width: double.infinity,
                 child: SfCartesianChart(
                   legend: Legend(isVisible: false),
@@ -58,22 +58,13 @@ class DollarWidget extends StatelessWidget {
       List<List<dynamic>> data) {
     List<CartesianSeries<dynamic, String>> seriesList = [];
 
-    final LinearGradient gradientColors = LinearGradient(
-        colors: <Color>[
-          Colors.grey.withOpacity(0.2),
-          Colors.grey.withOpacity(0.1),
-          Colors.transparent
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter);
-
     for (int i = 1; i < data[0].length; i++) {
       String seriesName = data[0][i];
       print("i");
       print(seriesName);
       seriesList.add(
         AreaSeries<ChartData, String>(
-          gradient: gradientColors,
+          color: Colors.grey.withOpacity(0.2),
           borderDrawMode: BorderDrawMode.top,
           borderColor: Colors.grey,
           name: seriesName,

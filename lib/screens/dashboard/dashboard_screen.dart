@@ -3,8 +3,8 @@ import 'package:price/core/constants/color_constants.dart';
 import 'package:price/responsive.dart';
 import 'package:price/screens/dashboard/widgets/detail_widget.dart';
 import 'package:price/screens/dashboard/widgets/dollar_widget.dart';
+import 'package:price/screens/dashboard/widgets/metal_widget.dart';
 import 'package:price/screens/dashboard/widgets/oil_widget.dart';
-import 'package:price/screens/dashboard/components/recent_forums.dart';
 
 import 'components/header.dart';
 
@@ -30,12 +30,12 @@ class DashboardScreen extends StatelessWidget {
                       children: [
                         DollarWidget(),
                         SizedBox(height: defaultPadding),
-                        RecentDiscussions(),
+                        MetalWidget(),
                         if (!Responsive.isDesktop(context))
                           SizedBox(height: defaultPadding),
-                        if (!Responsive.isDesktop(context)) OilWidget(),
-                      ],
-                    ),
+                        if (!Responsive.isDesktop(context)) OilWidget()
+                      ]
+                    )
                   ),
                   if (Responsive.isDesktop(context))
                     SizedBox(width: defaultPadding),

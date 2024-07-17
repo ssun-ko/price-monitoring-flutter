@@ -54,6 +54,20 @@ class DetailCard extends StatelessWidget {
   }
 
   Widget _buildChartWidget(DataProvider dataProvider) {
+    // gradients for area chart
+    final LinearGradient gradientColors = LinearGradient(
+        colors: <Color>[
+          _getPriceShift(dataProvider)["diff"].toString().contains('-')
+              ? Colors.blueAccent.withOpacity(0.2)
+              : Colors.redAccent.withOpacity(0.2),
+          _getPriceShift(dataProvider)["diff"].toString().contains('-')
+              ? Colors.blueAccent.withOpacity(0.1)
+              : Colors.redAccent.withOpacity(0.1),
+          Colors.transparent
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter);
+
     return Expanded(
         child: SfCartesianChart(
             legend: Legend(isVisible: false),
@@ -63,10 +77,7 @@ class DetailCard extends StatelessWidget {
             margin: EdgeInsets.zero,
             series: [
           AreaSeries<ChartData, String>(
-              color:
-                  _getPriceShift(dataProvider)["diff"].toString().contains('-')
-                      ? Colors.blueAccent.withOpacity(0.2)
-                      : Colors.redAccent.withOpacity(0.2),
+              gradient: gradientColors,
               borderDrawMode: BorderDrawMode.top,
               borderColor:
                   _getPriceShift(dataProvider)["diff"].toString().contains('-')

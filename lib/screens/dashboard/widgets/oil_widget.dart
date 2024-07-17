@@ -35,8 +35,7 @@ class OilWidget extends StatelessWidget {
               children: [
                 WidgetTitle(title: oilWidgetTitle),
                 SizedBox(
-                  height:
-                      MediaQuery.of(context).size.height - defaultPadding * 8,
+                  height: 600,
                   width: double.infinity,
                   child: SfCartesianChart(
                     enableSideBySideSeriesPlacement: false,
