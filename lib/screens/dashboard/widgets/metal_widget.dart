@@ -48,7 +48,17 @@ class MetalWidget extends StatelessWidget {
                     series: <ColumnSeries>[
                       ColumnSeries<ChartData2, String>(
                           spacing: 0.1,
-                          color: Colors.grey,
+                          color: Colors.blueGrey[100],
+                          dataSource: _getChartData(dataProvider.metalData),
+                          xValueMapper: (ChartData2 data, _) => data.x,
+                          yValueMapper: (ChartData2 data, _) => data.y3,
+                          name: dataProvider
+                              .metalData[dataProvider.metalData.length - 3][0]
+                              .toString()
+                              .substring(0, 7)),
+                      ColumnSeries<ChartData2, String>(
+                          spacing: 0.1,
+                          color: Colors.blueGrey[300],
                           dataSource: _getChartData(dataProvider.metalData),
                           xValueMapper: (ChartData2 data, _) => data.x,
                           yValueMapper: (ChartData2 data, _) => data.y2,
@@ -58,7 +68,7 @@ class MetalWidget extends StatelessWidget {
                               .substring(0, 7)),
                       ColumnSeries<ChartData2, String>(
                           spacing: 0.1,
-                          color: Colors.blueGrey,
+                          color: Colors.blueGrey[500],
                           dataSource: _getChartData(dataProvider.metalData),
                           xValueMapper: (ChartData2 data, _) => data.x,
                           yValueMapper: (ChartData2 data, _) => data.y,
@@ -82,8 +92,9 @@ class MetalWidget extends StatelessWidget {
 
       double y = double.tryParse(data.last[i].toString()) ?? 0.0;
       double y2 = double.tryParse(data[data.length - 2][i].toString()) ?? 0.0;
+      double y3 = double.tryParse(data[data.length - 3][i].toString()) ?? 0.0;
 
-      seriesData.add(ChartData2(x, y, y2));
+      seriesData.add(ChartData2(x, y, y2, y3));
     }
     return seriesData;
   }

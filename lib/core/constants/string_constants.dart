@@ -14,7 +14,7 @@ const updateDateMessage = "최종 업데이트 시간: ";
 
 const oilWidgetTitle = "오늘의 유가 정보";
 const dollarWidgetTitle = "최근 30일 원달러 환율";
-const metalWidgetTitle = "전월 대비 철강 가격 증감률";
+const metalWidgetTitle = "최근 3개월 철강 가격 변화";
 
 const dailyWidgetLabel = "일간";
 const monthlyWidgetLabel = "월간";
