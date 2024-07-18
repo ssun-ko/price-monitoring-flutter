@@ -42,7 +42,7 @@ class DataTableSection extends StatelessWidget {
   }
 
   List<DataRow> _buildRows() {
-    return filteredData.sublist(1).map((row) {
+    return filteredData.sublist(1).reversed.map((row) {
       return DataRow(
         cells: row.map((cell) {
           return DataCell(Text(cell.toString()));
