@@ -13,40 +13,6 @@ class OilWidget extends StatefulWidget {
 }
 
 class _OilWidgetState extends State<OilWidget> {
-  late MapShapeSource _dataSource;
-  late List<GeoModel> data;
-
-  @override
-  void initState() {
-    data = <GeoModel>[
-      GeoModel("Seoul", "11", bgColor, "서울", "0.0"),
-      GeoModel("Busan", "21", bgColor, "부산", "0.0"),
-      GeoModel("Daegu", "22", bgColor, "대구", "0.0"),
-      GeoModel("Incheon", "23", bgColor, "인천", "0.0"),
-      GeoModel("Gwangju", "24", bgColor, "광주", "0.0"),
-      GeoModel("Daejeon", "25", bgColor, "대전", "0.0"),
-      GeoModel("Ulsan", "26", bgColor, "울산", "0.0"),
-      GeoModel("Sejongsi", "29", bgColor, "세종", "0.0"),
-      GeoModel("Gyeonggi-do", "31", bgColor, "경기", "0.0"),
-      GeoModel("Gangwon-do", "32", bgColor, "강원", "0.0"),
-      GeoModel("Chungcheongbuk-do", "33", bgColor, "충북", "0.0"),
-      GeoModel("Chungcheongnam-do", "34", bgColor, "충남", "0.0"),
-      GeoModel("Jeollabuk-do", "35", bgColor, "전북", "0.0"),
-      GeoModel("Jeollanam-do", "36", bgColor, "전남", "0.0"),
-      GeoModel("Gyeongsangbuk-do", "37", bgColor, "경북", "0.0"),
-      GeoModel("Gyeongsangnam-do", "38", bgColor, "경남", "0.0"),
-      GeoModel("Jeju-do", "39", bgColor, "제주", "0.0")
-    ];
-
-    _dataSource = MapShapeSource.asset('map/korea-provinces-2018-geo.json',
-        shapeDataField: 'name_eng',
-        dataCount: data.length,
-        primaryValueMapper: (int index) => data[index].name,
-        shapeColorValueMapper: (int index) => data[index].color);
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(builder: (context, dataProvider, _) {
@@ -82,7 +48,7 @@ class _OilWidgetState extends State<OilWidget> {
           return Colors.blueAccent.shade100;
         }
 
-        data = <GeoModel>[
+        List<GeoModel> data = <GeoModel>[
           GeoModel("Seoul", "11", _getGeoColor(2), "서울", _getGeoPrice(2)),
           GeoModel("Busan", "21", _getGeoColor(12), "부산", _getGeoPrice(12)),
           GeoModel("Daegu", "22", _getGeoColor(11), "대구", _getGeoPrice(11)),
@@ -116,13 +82,29 @@ class _OilWidgetState extends State<OilWidget> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              WidgetTitle(title: oilWidgetTitle),
+              Row(
+                children: [
+                  WidgetTitle(title: oilWidgetTitle),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      icon: Icon(Icons.help_outline_rounded),
+                  tooltip: "전국 평균 유가보다 높은 지역은 붉은색, 낮은 지역은 푸른색으로 표시됩니다.",)
+                ],
+              ),
               SizedBox(
                   height: 600,
                   width: double.infinity,
                   child: SfMaps(layers: [
                     MapShapeLayer(
-                        source: _dataSource,
+                        source: MapShapeSource.asset(
+                            'map/korea-provinces-2018-geo.json',
+                            shapeDataField: 'name_eng',
+                            dataCount: data.length,
+                            primaryValueMapper: (int index) => data[index].name,
+                            shapeColorValueMapper: (int index) =>
+                                data[index].color),
                         shapeTooltipBuilder: (BuildContext context, int index) {
                           return Container(
                             color: bgColor,
