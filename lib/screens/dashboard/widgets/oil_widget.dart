@@ -82,16 +82,21 @@ class _OilWidgetState extends State<OilWidget> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(
-                children: [
-                  WidgetTitle(title: oilWidgetTitle),
-                  Spacer(),
-                  IconButton(
+              SizedBox(
+                height: 26,
+                child: Row(
+                  children: [
+                    WidgetTitle(title: oilWidgetTitle),
+                    Spacer(),
+                    IconButton(
+                      padding: EdgeInsets.all(0),
                       onPressed: () {},
                       color: Colors.white,
-                      icon: Icon(Icons.help_outline_rounded),
-                  tooltip: "전국 평균 유가보다 높은 지역은 붉은색, 낮은 지역은 푸른색으로 표시됩니다.",)
-                ],
+                      icon: Icon(Icons.help_outline_rounded, size: 20),
+                      tooltip: "전국 평균 유가보다 높은 지역은 붉은색, 낮은 지역은 푸른색으로 표시됩니다.",
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                   height: 600,
