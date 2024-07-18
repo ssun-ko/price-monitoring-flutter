@@ -55,28 +55,24 @@ class DetailCard extends StatelessWidget {
 
   Widget _buildChartWidget(DataProvider dataProvider) {
     // gradients for area chart
-    final LinearGradient gradientColors = LinearGradient(
-        colors: <Color>[
-          _getPriceShift(dataProvider)["diff"].toString().contains('-')
-              ? Colors.blueAccent.withOpacity(0.2)
-              : Colors.redAccent.withOpacity(0.2),
-          _getPriceShift(dataProvider)["diff"].toString().contains('-')
-              ? Colors.blueAccent.withOpacity(0.1)
-              : Colors.redAccent.withOpacity(0.1),
-          Colors.transparent
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter);
+    final LinearGradient gradientColors = LinearGradient(colors: <Color>[
+      _getPriceShift(dataProvider)["diff"].toString().contains('-')
+          ? Colors.blueAccent.withOpacity(0.2)
+          : Colors.redAccent.withOpacity(0.2),
+      _getPriceShift(dataProvider)["diff"].toString().contains('-')
+          ? Colors.blueAccent.withOpacity(0.1)
+          : Colors.redAccent.withOpacity(0.1),
+      Colors.transparent
+    ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 
     return Expanded(
         child: SfCartesianChart(
             legend: Legend(isVisible: false),
             tooltipBehavior: TooltipBehavior(
-              decimalPlaces: 0,
-              enable: true,
-              color: bgColor,
-              textStyle: TextStyle(color: Colors.white)
-            ),
+                decimalPlaces: 0,
+                enable: true,
+                color: bgColor,
+                textStyle: TextStyle(color: Colors.white)),
             plotAreaBorderColor: Colors.transparent,
             primaryXAxis: CategoryAxis(isVisible: false),
             primaryYAxis: NumericAxis(isVisible: false),
@@ -220,7 +216,9 @@ class DetailCard extends StatelessWidget {
     ];
 
     List<double> yesterdayValues = [
-      dataProvider.oilData[dataProvider.oilData.length - 2][1],
+      double.tryParse(dataProvider.oilData[dataProvider.oilData.length - 2][1]
+              .toString()) ??
+          0.0,
       dataProvider.noMetalData[dataProvider.noMetalData.length - 2][1],
       dataProvider.noMetalData[dataProvider.noMetalData.length - 2][2],
       dataProvider.noMetalData[dataProvider.noMetalData.length - 2][5],

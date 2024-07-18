@@ -44,18 +44,18 @@ class DetailWidget extends StatelessWidget {
         );
       } else {
         return Container(
-          height: 1000,
+            height: 1000,
             child: Column(children: [
-          DetailCard(cardNumber: 1),
-          SizedBox(height: defaultPadding),
-          DetailCard(cardNumber: 2),
-          SizedBox(height: defaultPadding),
-          DetailCard(cardNumber: 3),
-          SizedBox(height: defaultPadding),
-          DetailCard(cardNumber: 4),
-          SizedBox(height: defaultPadding),
-          DetailCard(cardNumber: 5)
-        ]));
+              DetailCard(cardNumber: 1),
+              SizedBox(height: defaultPadding),
+              DetailCard(cardNumber: 2),
+              SizedBox(height: defaultPadding),
+              DetailCard(cardNumber: 3),
+              SizedBox(height: defaultPadding),
+              DetailCard(cardNumber: 4),
+              SizedBox(height: defaultPadding),
+              DetailCard(cardNumber: 5)
+            ]));
       }
     });
   }
