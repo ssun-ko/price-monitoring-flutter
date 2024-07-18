@@ -8,9 +8,9 @@ The solution gathers price data for diverse raw materials and presents it throug
 
 ## Data Sources
 
-* [한국비철금속협회](https://www.nonferrous.or.kr/)
-* [한국비철금속협회](https://www.nonferrous.or.kr/)
-* [한국비철금속협회](https://www.nonferrous.or.kr/)
+* [공공데이터포털](https://www.data.go.kr/)
+* [Opinet](https://www.opinet.co.kr/user/main/mainView.do)
+* [한국은행 Open API 서비스](https://ecos.bok.or.kr/api/#/)
 
 
 ## References
