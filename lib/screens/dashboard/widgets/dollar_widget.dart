@@ -34,18 +34,17 @@ class DollarWidget extends StatelessWidget {
                 height: 250,
                 width: double.infinity,
                 child: SfCartesianChart(
-                  legend: Legend(isVisible: false),
-                  plotAreaBorderColor: Colors.transparent,
-                  tooltipBehavior: TooltipBehavior(
-                    enable: true,
-                    color: bgColor,
-                    textStyle: TextStyle(color: Colors.white),
-                  ),
-                  margin: EdgeInsets.zero,
-                  primaryXAxis: CategoryAxis(),
-                  primaryYAxis: NumericAxis(isVisible: false),
-                  series: _buildSeries(dataProvider.dollarData)
-                ),
+                    legend: Legend(isVisible: false),
+                    plotAreaBorderColor: Colors.transparent,
+                    tooltipBehavior: TooltipBehavior(
+                      enable: true,
+                      color: bgColor,
+                      textStyle: TextStyle(color: Colors.white),
+                    ),
+                    margin: EdgeInsets.zero,
+                    primaryXAxis: CategoryAxis(),
+                    primaryYAxis: NumericAxis(isVisible: false),
+                    series: _buildSeries(dataProvider.dollarData)),
               )
             ],
           ),
@@ -58,14 +57,11 @@ class DollarWidget extends StatelessWidget {
       List<List<dynamic>> data) {
     List<CartesianSeries<dynamic, String>> seriesList = [];
 
-    final LinearGradient gradientColors = LinearGradient(
-        colors: <Color>[
-          Colors.grey.withOpacity(0.2),
-          Colors.grey.withOpacity(0.1),
-          Colors.transparent
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter);
+    final LinearGradient gradientColors = LinearGradient(colors: <Color>[
+      Colors.grey.withOpacity(0.2),
+      Colors.grey.withOpacity(0.1),
+      Colors.transparent
+    ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 
     for (int i = 1; i < data[0].length; i++) {
       String seriesName = data[0][i];

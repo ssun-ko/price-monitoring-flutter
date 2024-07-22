@@ -25,18 +25,15 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 965,
-                    child: Column(
-                      children: [
+                      flex: 965,
+                      child: Column(children: [
                         DollarWidget(),
                         SizedBox(height: defaultPadding),
                         MetalWidget(),
                         if (!Responsive.isDesktop(context))
                           SizedBox(height: defaultPadding),
                         if (!Responsive.isDesktop(context)) OilWidget()
-                      ]
-                    )
-                  ),
+                      ])),
                   if (Responsive.isDesktop(context))
                     SizedBox(width: defaultPadding),
                   if (Responsive.isDesktop(context))

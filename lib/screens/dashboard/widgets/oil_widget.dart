@@ -50,28 +50,28 @@ class _OilWidgetState extends State<OilWidget> {
 
         List<GeoModel> data = <GeoModel>[
           GeoModel("Seoul", "11", _getGeoColor(2), "서울", _getGeoPrice(2)),
-          GeoModel("Busan", "21", _getGeoColor(12), "부산", _getGeoPrice(12)),
-          GeoModel("Daegu", "22", _getGeoColor(11), "대구", _getGeoPrice(11)),
+          GeoModel("Busan", "21", _getGeoColor(15), "부산", _getGeoPrice(15)),
+          GeoModel("Daegu", "22", _getGeoColor(14), "대구", _getGeoPrice(14)),
           GeoModel("Incheon", "23", _getGeoColor(4), "인천", _getGeoPrice(4)),
-          GeoModel("Gwangju", "24", _getGeoColor(13), "광주", _getGeoPrice(13)),
-          GeoModel("Daejeon", "25", _getGeoColor(10), "대전", _getGeoPrice(10)),
-          GeoModel("Ulsan", "26", _getGeoColor(12), "울산", _getGeoPrice(12)),
-          GeoModel("Sejongsi", "29", _getGeoColor(9), "세종", _getGeoPrice(9)),
+          GeoModel("Gwangju", "24", _getGeoColor(16), "광주", _getGeoPrice(16)),
+          GeoModel("Daejeon", "25", _getGeoColor(13), "대전", _getGeoPrice(13)),
+          GeoModel("Ulsan", "26", _getGeoColor(17), "울산", _getGeoPrice(17)),
+          GeoModel("Sejongsi", "29", _getGeoColor(12), "세종", _getGeoPrice(12)),
           GeoModel("Gyeonggi-do", "31", _getGeoColor(3), "경기", _getGeoPrice(3)),
           GeoModel("Gangwon-do", "32", _getGeoColor(5), "강원", _getGeoPrice(5)),
           GeoModel("Chungcheongbuk-do", "33", _getGeoColor(6), "충북",
               _getGeoPrice(6)),
-          GeoModel("Chungcheongnam-do", "34", _getGeoColor(6), "충남",
-              _getGeoPrice(6)),
+          GeoModel("Chungcheongnam-do", "34", _getGeoColor(7), "충남",
+              _getGeoPrice(7)),
           GeoModel(
-              "Jeollabuk-do", "35", _getGeoColor(7), "전북", _getGeoPrice(7)),
+              "Jeollabuk-do", "35", _getGeoColor(8), "전북", _getGeoPrice(8)),
           GeoModel(
-              "Jeollanam-do", "36", _getGeoColor(7), "전남", _getGeoPrice(7)),
+              "Jeollanam-do", "36", _getGeoColor(9), "전남", _getGeoPrice(9)),
           GeoModel(
-              "Gyeongsangbuk-do", "37", _getGeoColor(8), "경북", _getGeoPrice(8)),
+              "Gyeongsangbuk-do", "37", _getGeoColor(10), "경북", _getGeoPrice(10)),
           GeoModel(
-              "Gyeongsangnam-do", "38", _getGeoColor(8), "경남", _getGeoPrice(8)),
-          GeoModel("Jeju-do", "39", _getGeoColor(15), "제주", _getGeoPrice(15))
+              "Gyeongsangnam-do", "38", _getGeoColor(11), "경남", _getGeoPrice(11)),
+          GeoModel("Jeju-do", "39", _getGeoColor(18), "제주", _getGeoPrice(18))
         ];
 
         return Container(
