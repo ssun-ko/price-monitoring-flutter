@@ -14,6 +14,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        ref: main
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -33,10 +35,13 @@ jobs:
         PUBLIC_DATA_CENTER_API_KEY: ${{ secrets.PUBLIC_DATA_CENTER_API_KEY }}
       run: python main.py
 
+    - name: Configure Git
+      run: |
+        git config --global user.name 'ko-hoon'
+        git config --global user.email 'seunghoon_jeon@kolon.com'
+
     - name: Commit and push changes
       run: |
-        git config user.name 'ko-hoon'
-        git config user.email 'seunghoon_jeon@kolon.com'
         DATE=$(date +'%Y년 %m월 %d일')
         git add .
         git commit -m "$DATE Data update"

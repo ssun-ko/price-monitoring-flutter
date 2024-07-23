@@ -204,7 +204,7 @@ def main():
     metal_price_filename = "monthly_metal_data.csv"
 
     # Git 저장소 최신화
-    git_pull(repo_path)
+    # git_pull(repo_path)
 
     # 현재 날짜 및 이전 영업일 계산
     today = datetime.today()
