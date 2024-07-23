@@ -1,0 +1,43 @@
+name: Run Python script
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.py'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+
+    - name: Run Python script
+      env:
+        KOREA_BANK_API_KEY: ${{ secrets.KOREA_BANK_API_KEY }}
+        LME_PRICE_URL: ${{ secrets.LME_PRICE_URL }}
+        OPINET_API_KEY: ${{ secrets.OPINET_API_KEY }}
+        PUBLIC_DATA_CENTER_API_KEY: ${{ secrets.PUBLIC_DATA_CENTER_API_KEY }}
+      run: python main.py
+
+    - name: Commit and push changes
+      run: |
+        git config user.name 'ko-hoon'
+        git config user.email 'seunghoon_jeon@kolon.com'
+        DATE=$(date +'%Y년 %m월 %d일')
+        git add .
+        git commit -m "$DATE Data update"
+        git push
