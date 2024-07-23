@@ -223,7 +223,7 @@ def main():
     # 현재 날짜 및 이전 영업일 계산
     today = datetime.today()
     formatted_today = today.strftime('%Y-%m-%d')
-    previous_business_day = today - timedelta(days=3) if today.weekday() == 0 else today
+    previous_business_day = today - timedelta(days=3) if today.weekday() == 0 else today - timedelta(days=1)
     formatted_previous_business_day = previous_business_day.strftime('%Y-%m-%d')
 
     # 데이터 초기화
