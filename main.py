@@ -1,11 +1,11 @@
 import os
 import csv
+import subprocess
 import urllib
 import requests
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-import subprocess
 
 # 환경 변수에서 API 키 가져오기
 KOREA_BANK_API_KEY = os.getenv("KOREA_BANK_API_KEY")
@@ -36,7 +36,7 @@ def fetch_data(url, params=None, encoding=None):
     try:
         if params:
             params = urllib.parse.urlencode(params, safe='#\':()+%=').encode('utf-8')
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=5)
         response.encoding = encoding if encoding else response.apparent_encoding
         if response.status_code == 200:
             print(f"{url} 읽어오기 완료")
@@ -177,12 +177,26 @@ def git_commit_and_push(repo_path, commit_message):
     try:
         # 작업 디렉토리를 Git 저장소 디렉토리로 변경
         os.chdir(repo_path)
-        
+
         # 변경 사항 확인
         status_output = subprocess.check_output(["git", "status", "--porcelain"]).decode().strip()
         if status_output:
+            subprocess.run(["git", "config", "user.name", "ko-hoon"], check=True)
+            subprocess.run(["git", "config", "user.email", "seunghoon_jeon@kolon.com"], check=True)
             subprocess.run(["git", "add", "."], check=True)
             subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+            # 환경 변수에서 GITHUB_TOKEN을 가져옴
+            token = os.getenv('GITHUB_TOKEN')
+            if not token:
+                raise Exception("GITHUB_TOKEN이 설정되지 않았습니다.")
+
+            # 리모트 URL에 토큰 추가 (origin 대신 실제 리모트 이름을 사용)
+            remote_url = subprocess.check_output(["git", "config", "--get", "remote.origin.url"]).decode().strip()
+            token_url = remote_url.replace("https://", f"https://{token}@")
+
+            # 리모트 URL 업데이트
+            subprocess.run(["git", "remote", "set-url", "origin", token_url], check=True)
             subprocess.run(["git", "push"], check=True)
             print("변경 사항을 Git 저장소에 커밋 및 푸쉬 완료")
         else:
