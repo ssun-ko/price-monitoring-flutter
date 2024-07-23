@@ -58,7 +58,7 @@ def initialize_data():
     return {
         'no_metal_prices': {'일자': None, '구리': None, '알루미늄': None, '아연': None, '납': None, '니켈': None, '주석': None},
         'dollar_won_rate': {'일자': None, '환율': None},
-        'oil_price': {'일자': None, '전국': None, '서울': None, '경기': None, '강원': None, '충북': None, '충남': None, '전북': None, '전남': None, '경북': None, '경남': None, '부산': None, '제주': None, '대구': None, '인천': None, '광주': None, '대전': None, '울산': None, '세종': None},
+        'oil_price': {'일자': None, '전국': None, '서울': None, '경기': None, '인천': None, '강원': None, '충복': None, '충남': None, '전북': None, '전남': None, '경북': None, '경남': None, '세종': None, '대전': None, '대구': None, '부산': None, '광주': None, '울산': None, '제주': None},
         'metal_price': []
     }
 
