@@ -39,10 +39,10 @@ def fetch_data(url, params=None, encoding=None):
         response = requests.get(url, params=params, timeout=5)
         response.encoding = encoding if encoding else response.apparent_encoding
         if response.status_code == 200:
-            print(f"{url} 읽어오기 완료")
+            print(f"url 주소 읽어오기 완료")
             return response
         else:
-            raise Exception(f"{url} 읽어오기 실패")
+            raise Exception(f"url 주소 읽어오기 실패")
     except Exception as e:
         print(f"데이터 가져오기 중 에러 발생: {e}")
         return None
@@ -186,10 +186,10 @@ def git_commit_and_push(repo_path, commit_message):
             subprocess.run(["git", "add", "."], check=True)
             subprocess.run(["git", "commit", "-m", commit_message], check=True)
 
-            # 환경 변수에서 GITHUB_TOKEN을 가져옴
-            token = os.getenv('GITHUB_TOKEN')
+            # 환경 변수에서 GH_TOKEN을 가져옴
+            token = os.getenv('GH_TOKEN')
             if not token:
-                raise Exception("GITHUB_TOKEN이 설정되지 않았습니다.")
+                raise Exception("GH_TOKEN이 설정되지 않았습니다.")
 
             # 리모트 URL에 토큰 추가 (origin 대신 실제 리모트 이름을 사용)
             remote_url = subprocess.check_output(["git", "config", "--get", "remote.origin.url"]).decode().strip()

@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '50 7 * * 1-5'
+    - cron: '20 8 * * 1-5'
 
 jobs:
   run-script:
@@ -24,6 +24,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests beautifulsoup4
 
+    - name: Configure Git
+      run: |
+        git config --global user.name 'ko-hoon'
+        git config --global user.email 'seunghoon_jeon@kolon.com'
+
     - name: Run Python script
       env:
         KOREA_BANK_API_KEY: ${{ secrets.KOREA_BANK_API_KEY }}
@@ -31,15 +36,3 @@ jobs:
         OPINET_API_KEY: ${{ secrets.OPINET_API_KEY }}
         PUBLIC_DATA_CENTER_API_KEY: ${{ secrets.PUBLIC_DATA_CENTER_API_KEY }}
       run: python main.py
-
-    - name: Configure Git
-      run: |
-        git config --global user.name 'ko-hoon'
-        git config --global user.email 'seunghoon_jeon@kolon.com'
-
-    - name: Commit and push changes
-      run: |
-        DATE=$(date +'%Y년 %m월 %d일')
-        git add .
-        git commit -m "$DATE Data update"
-        git push
