@@ -79,7 +79,7 @@ def korea_bank(dollar_rate, date):
         print(f"한국은행 데이터 가져오기 중 에러 발생: {e}")
 
 
-# 한국비철금속협회 데이터 가져오기
+# LME 데이터 가져오기
 def lme_price(prices):
     try:
         html = fetch_data(LME_PRICE_URL).text
@@ -88,9 +88,9 @@ def lme_price(prices):
         prices['일자'] = td_elements[0].text.replace(". ", "-")
         for metal, idx in zip(['구리', '알루미늄', '아연', '납', '니켈', '주석'], range(1, 7)):
             prices[metal] = float(td_elements[idx].text.replace(",", ""))
-        print(f"한국비철금속협회 크롤링으로 비철금속 데이터 가져오기 완료, 날짜: {prices['일자']}")
+        print(f"LME 비철금속 데이터 가져오기 완료, 날짜: {prices['일자']}")
     except Exception as e:
-        print(f"한국비철금속협회 데이터 가져오기 중 에러 발생: {e}")
+        print(f"LME 데이터 가져오기 중 에러 발생: {e}")
 
 
 # 오피넷 데이터 가져오기
@@ -114,7 +114,7 @@ def opinet_oil(prices):
                 print(f"입력되지 않은 지역 {sido}이 있습니다")
         print(f"Opinet API로 유가 데이터 가져오기 완료, 날짜: {prices['일자']}")
     except Exception as e:
-        print(f"오피넷 데이터 가져오기 중 에러 발생: {e}")
+        print(f"Opinet 데이터 가져오기 중 에러 발생: {e}")
 
 
 # 공공 데이터 포탈 데이터 가져오기
