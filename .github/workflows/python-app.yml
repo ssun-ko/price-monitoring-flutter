@@ -2,7 +2,8 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '40 8 * * 1-5'
+    - cron: '40 8 * * 1-5' 
+  workflow_dispatch:  # 수동 트리거
 
 jobs:
   run-script:
