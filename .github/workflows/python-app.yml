@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '0 12 * * *' # 매일 오후 12시에 실행
+    - cron: '0 12 * * 1-5' # 월요일부터 금요일 오후 12시에 실행
 
 jobs:
   run-script:
