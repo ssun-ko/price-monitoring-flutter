@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '30 16 * * 1-5'  # 월요일부터 금요일 오후 1시 30분에 실행 (UTC 기준 7시 30분)
+    - cron: '0 5 * * 1-5'  # 월요일부터 금요일 오후 1시 30분에 실행 (UTC 기준 7시 30분)
 
 jobs:
   run-script:
@@ -32,8 +32,8 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
+        git config user.name 'ko-hoon'
+        git config user.email 'seunghoon_jeon@kolon.com'
         DATE=$(date +'%Y년 %m월 %d일')
         git add .
         git commit -m "$DATE Data update"
