@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-network:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,4 +23,4 @@ jobs:
       - name: 네트워크 연결 테스트
         run: |
           echo "curl 명령어 실행"
-          curl -I -v --connect-timeout 60 http://nonferrous.or.kr
+          curl -I -v --connect-timeout 60 https://nonferrous.or.kr
