@@ -23,4 +23,5 @@ jobs:
       - name: 네트워크 연결 테스트
         run: |
           echo "curl 명령어 실행"
+          sudo systemd-resolve --flush-caches
           curl -I -v -H "Host: nonferrous.or.kr" http://nonferrous.or.kr
