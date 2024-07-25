@@ -11,4 +11,4 @@ jobs:
     steps:
     - name: curl homepage test
       run: |
-        curl -I https://nonferrous.or.kr
+        curl -I http://nonferrous.or.kr
