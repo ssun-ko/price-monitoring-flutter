@@ -3,7 +3,6 @@ name: gh-pages
 on:
   push:
     branches: main
-  workflow_dispatch: # 수동 트리거\
 
 jobs:
   build:
