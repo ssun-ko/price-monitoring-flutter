@@ -1,0 +1,7 @@
+name: curl homepage test
+
+on:
+  workflow_dispatch:  # 수동 트리거
+
+jobs:
+  run: curl -I https://nonferrous.or.kr
