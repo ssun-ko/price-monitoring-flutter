@@ -6,14 +6,21 @@ on:
   workflow_dispatch:  # 수동 트리거
 
 jobs:
-  run-script:
+  test-network:
     runs-on: ubuntu-latest
     steps:
-    - name: curl homepage test
-      run: |
-        echo "환경 변수 확인:"
-        printenv | grep -i proxy
-        echo "프록시 설정 제거:"
-        unset http_proxy
-        unset https_proxy
-        curl -I -v http://nonferrous.or.kr
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: 프록시 설정 확인 및 제거
+        run: |
+          echo "환경 변수 확인:"
+          printenv | grep -i proxy || echo "프록시 설정 없음"
+          echo "프록시 설정 제거:"
+          unset http_proxy || true
+          unset https_proxy || true
+
+      - name: 네트워크 연결 테스트
+        run: |
+          echo "curl 명령어 실행"
+          curl -I -v --connect-timeout 60 http://nonferrous.or.kr
