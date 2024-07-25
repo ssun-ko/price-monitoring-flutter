@@ -39,10 +39,27 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: python main.py
 
+      - name: Check for changes
+        id: git-status
+        run: |
+          git add .
+          echo "::set-output name=changes::$(git status --porcelain)"
+
       - name: Commit and Push changes
+        if: steps.git-status.outputs.changes != ''
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git add .
           git commit -m "Update data"
           git push
+
+      - name: Trigger Flutter Build and Deploy
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/workflow.yml/dispatches \
+            -d '{"ref":"main"}'
