@@ -39,14 +39,8 @@ jobs:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: python main.py
 
-    - name: Commit and push changes
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          git add .
-          git commit -m "Automated update"
-          git push origin main
-        else
-          echo "No changes to commit"
-        fi
+    - name: Checkout repository again to reflect changes
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        fetch-depth: 0  # Ensure the full history is fetched
