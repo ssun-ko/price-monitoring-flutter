@@ -11,4 +11,9 @@ jobs:
     steps:
     - name: curl homepage test
       run: |
+        echo "환경 변수 확인:"
+        printenv | grep -i proxy
+        echo "프록시 설정 제거:"
+        unset http_proxy
+        unset https_proxy
         curl -I -v http://nonferrous.or.kr
