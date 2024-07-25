@@ -1,7 +1,14 @@
 name: curl homepage test
 
 on:
+  schedule:
+    - cron: '50 2 * * 1-5' 
   workflow_dispatch:  # 수동 트리거
 
 jobs:
-  run: curl -I https://nonferrous.or.kr
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: curl homepage test
+      run: |
+        curl -I https://nonferrous.or.kr
