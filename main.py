@@ -197,7 +197,7 @@ def git_commit_and_push(repo_path, commit_message):
 
             # 리모트 URL 업데이트
             subprocess.run(["git", "remote", "set-url", "origin", token_url], check=True)
-            subprocess.run(["git", "push", "origin", "main"], check=True)
+            subprocess.run(["git", "push"], check=True)
             print("변경 사항을 Git 저장소에 커밋 및 푸쉬 완료")
         else:
             print("변경 사항이 없어 커밋 및 푸쉬를 생략합니다.")
