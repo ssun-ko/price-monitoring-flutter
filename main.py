@@ -13,6 +13,7 @@ LME_PRICE_URL = os.getenv("LME_PRICE_URL")
 OPINET_API_KEY = os.getenv("OPINET_API_KEY")
 PUBLIC_DATA_CENTER_API_KEY = os.getenv("PUBLIC_DATA_CENTER_API_KEY")
 
+
 # 중복이 아니면 True, 중복값이면 False 반환
 def date_today_duplicate_check(file_path, file_name, today_date):
     try:
@@ -25,7 +26,7 @@ def date_today_duplicate_check(file_path, file_name, today_date):
         return True
     except FileNotFoundError:
         print(f"{file_name}이(가) 존재하지 않아 새로 만듭니다.")
-        return True 
+        return True
     except Exception as e:
         print(f"날짜 중복 체크 중 에러 발생: {e}")
         return False
@@ -166,7 +167,7 @@ def write_to_csv_file_metal(file_path, file_name, data):
 def git_pull(repo_path):
     # 작업 디렉토리를 Git 저장소 디렉토리로 변경
     os.chdir(repo_path)
-    
+
     # 최신 정보 가져오기
     subprocess.run(["git", "pull"], check=True)
     print("Git 저장소에서 최신 정보 가져오기 완료")
@@ -202,10 +203,12 @@ def git_commit_and_push(repo_path, commit_message):
         else:
             print("변경 사항이 없어 커밋 및 푸쉬를 생략합니다.")
     except subprocess.CalledProcessError as e:
-        print(f"Git 커밋 및 푸쉬 중 에러 발생: {e}")
+        if "nothing to commit, working tree clean" in str(e.output):
+            print("변경 사항이 없어 커밋 및 푸쉬를 생략합니다.")
+        else:
+            print(f"Git 커밋 및 푸쉬 중 에러 발생: {e}")
     except Exception as e:
         print(f"Git 작업 중 에러 발생: {e}")
-
 
 # 메인 함수
 def main():
