@@ -3,6 +3,7 @@ import 'package:price/core/constants/color_constants.dart';
 import 'package:price/providers/data_provider.dart';
 import 'package:price/responsive.dart';
 import 'package:price/screens/dashboard/components/detail_card.dart';
+import 'package:price/screens/dashboard/components/dollar_card.dart';
 import 'package:provider/provider.dart';
 
 class DetailWidget extends StatelessWidget {
@@ -31,30 +32,44 @@ class DetailWidget extends StatelessWidget {
       } else if (!Responsive.isMobile(context)) {
         return Container(
           child: Row(children: [
+            Expanded(
+              child: Row(
+                children: [
+                  DollarCard(cardNumber: 1),
+                  SizedBox(width: defaultPadding),
+                  DollarCard(cardNumber: 2)
+                ],
+              ),
+            ),
+            SizedBox(width: defaultPadding),
             DetailCard(cardNumber: 1),
             SizedBox(width: defaultPadding),
             DetailCard(cardNumber: 2),
             SizedBox(width: defaultPadding),
             DetailCard(cardNumber: 3),
             SizedBox(width: defaultPadding),
-            DetailCard(cardNumber: 4),
-            SizedBox(width: defaultPadding),
-            DetailCard(cardNumber: 5)
+            DetailCard(cardNumber: 4)
           ]),
         );
       } else {
         return Container(
             height: 1000,
             child: Column(children: [
+              Row(
+                children: [
+                  DollarCard(cardNumber: 1),
+                  SizedBox(width: defaultPadding),
+                  DollarCard(cardNumber: 2),
+                ],
+              ),
+              SizedBox(height: defaultPadding),
               DetailCard(cardNumber: 1),
               SizedBox(height: defaultPadding),
               DetailCard(cardNumber: 2),
               SizedBox(height: defaultPadding),
               DetailCard(cardNumber: 3),
               SizedBox(height: defaultPadding),
-              DetailCard(cardNumber: 4),
-              SizedBox(height: defaultPadding),
-              DetailCard(cardNumber: 5)
+              DetailCard(cardNumber: 4)
             ]));
       }
     });
