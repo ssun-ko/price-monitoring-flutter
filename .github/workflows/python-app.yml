@@ -45,14 +45,6 @@ jobs:
           git add .
           echo "::set-output name=changes::$(git status --porcelain)"
 
-      - name: Commit and Push changes
-        if: steps.git-status.outputs.changes != ''
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git commit -m "Update data"
-          git push
-
       - name: Trigger Flutter Build and Deploy
         if: always()
         env:
