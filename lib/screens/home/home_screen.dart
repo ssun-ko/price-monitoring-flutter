@@ -7,6 +7,7 @@ import 'package:price/providers/drawer_provider.dart';
 import 'package:price/providers/menu_provider.dart';
 import 'package:price/responsive.dart';
 import 'package:price/screens/analytics/metal_screen.dart';
+import 'package:price/screens/analytics/dollar_screen.dart';
 import 'package:price/screens/analytics/no_metal_screen.dart';
 import 'package:price/screens/analytics/oil_screen.dart';
 import 'package:price/screens/dashboard/dashboard_screen.dart';
@@ -90,8 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
         return MetalScreen();
       case 3:
         return NoMetalScreen();
-      default:
+      case 4:
         return OilScreen();
+      default:
+        return DollarScreen();
     }
   }
 }

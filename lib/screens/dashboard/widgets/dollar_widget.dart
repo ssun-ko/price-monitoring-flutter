@@ -64,7 +64,7 @@ class DollarWidget extends StatelessWidget {
     ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 
     for (int i = 1; i < data[0].length; i++) {
-      String seriesName = data[0][i];
+      String seriesName = "환율";
       seriesList.add(
         AreaSeries<ChartData, String>(
           gradient: gradientColors,

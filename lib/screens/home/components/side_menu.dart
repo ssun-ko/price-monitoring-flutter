@@ -67,6 +67,17 @@ class SideMenu extends StatelessWidget {
                 if (Responsive.isMobile(context))
                   context.read<DrawerProvider>().closeDrawer();
               },
+            ),
+            DrawerListTile(
+              title: "금융 정보",
+              icon: Icons.currency_exchange_rounded,
+              isSelected:
+              context.watch<MenuProvider>().menu == 5 ? true : false,
+              press: () {
+                context.read<MenuProvider>().changeMenu(5);
+                if (Responsive.isMobile(context))
+                  context.read<DrawerProvider>().closeDrawer();
+              },
             )
           ],
         ),

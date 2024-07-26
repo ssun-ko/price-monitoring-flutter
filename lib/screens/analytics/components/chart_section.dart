@@ -28,7 +28,11 @@ class ChartSection extends StatelessWidget {
                   color: bgColor,
                   textStyle: TextStyle(color: Colors.white),
                 ),
+                axes: _getYAxis(),
                 primaryXAxis: CategoryAxis(),
+                primaryYAxis: NumericAxis(
+                  name: 'right',
+                ),
                 series: _buildSeries()),
           ),
         ],
@@ -47,11 +51,26 @@ class ChartSection extends StatelessWidget {
           dataSource: _getChartData(),
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y[seriesName] ?? 0,
+          yAxisName: seriesName == '환율' ? 'left' : 'right'
         ),
       );
     }
 
     return seriesList;
+  }
+
+  List<ChartAxis> _getYAxis() {
+    if(menuId == 5) {
+      return <ChartAxis>[
+        NumericAxis(
+          name: 'left',
+          opposedPosition: true
+        )
+      ];
+    } else {
+      return <ChartAxis>[
+      ];
+    }
   }
 
   List<ChartData> _getChartData() {
