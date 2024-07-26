@@ -125,7 +125,7 @@ class _DollarScreenState extends State<DollarScreen> {
                   data: filteredData,
                   menuId: context.watch<MenuProvider>().menu),
               SizedBox(height: defaultPadding),
-              Text("🙄 금리는 실시간 데이터와 2일 이상 차이날 수 있습니다."),
+              Text("🥴🥴 금리는 실시간 데이터와 2일 이상 차이날 수 있습니다."),
               ExcelDownloadButton(onPressed: () {
                 CSVUtil.downloadCSV(data, fileName);
                 DownloadSnackBar.showSnackBar(context);

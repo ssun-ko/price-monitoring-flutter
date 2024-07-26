@@ -29,7 +29,7 @@ class DetailWidget extends StatelessWidget {
             child: CircularProgressIndicator(),
           ),
         );
-      } else if (!Responsive.isMobile(context)) {
+      } else if (Responsive.isDesktop(context)) {
         return Container(
           child: Row(children: [
             Expanded(

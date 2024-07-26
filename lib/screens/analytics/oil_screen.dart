@@ -125,6 +125,7 @@ class _OilScreenState extends State<OilScreen> {
                   data: filteredData,
                   menuId: context.watch<MenuProvider>().menu),
               SizedBox(height: defaultPadding),
+              Text("🤮🤮 유가 정보는 경유 기준입니다."),
               ExcelDownloadButton(onPressed: () {
                 CSVUtil.downloadCSV(data, fileName);
                 DownloadSnackBar.showSnackBar(context);

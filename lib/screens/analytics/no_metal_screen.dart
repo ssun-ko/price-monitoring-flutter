@@ -125,7 +125,7 @@ class _NoMetalScreenState extends State<NoMetalScreen> {
                   data: filteredData,
                   menuId: context.watch<MenuProvider>().menu),
               SizedBox(height: defaultPadding),
-              Text("🙄 가격 변동 표현을 위해 Min-Max Scale이 적용된 그래프입니다."),
+              Text("🙄🙄 가격 변동 표현을 위해 Min-Max Scale이 적용된 그래프입니다."),
               ExcelDownloadButton(onPressed: () {
                 CSVUtil.downloadCSV(data, fileName);
                 DownloadSnackBar.showSnackBar(context);

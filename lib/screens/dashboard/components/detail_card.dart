@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:price/core/constants/color_constants.dart';
 import 'package:price/models/chart_data_model.dart';
 import 'package:price/providers/data_provider.dart';
+import 'package:price/screens/dashboard/components/widget_title.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -39,7 +40,7 @@ class DetailCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(_getWidgetTitle()),
+                WidgetTitle(title: _getWidgetTitle()),
                 SizedBox(height: defaultPadding / 2),
                 Text(_getTodayPrice(dataProvider),
                     style: Theme.of(context).textTheme.titleLarge),
