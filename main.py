@@ -58,7 +58,7 @@ def format_date(date, input_format, output_format):
 def initialize_data():
     return {
         'no_metal_prices': {'일자': None, '구리': None, '알루미늄': None, '아연': None, '납': None, '니켈': None, '주석': None},
-        'dollar_won_rate': {'일자': None, '환율': None, '금리': None, 'KORIBO': None},
+        'dollar_won_rate': {'일자': None, '환율': None, '금리': None, 'KORIBOR': None},
         'oil_price': {'일자': None, '전국': None, '서울': None, '경기': None, '인천': None, '강원': None, '충북': None, '충남': None, '전북': None, '전남': None, '경북': None, '경남': None, '세종': None, '대전': None, '대구': None, '부산': None, '광주': None, '울산': None, '제주': None},
         'metal_price': []
     }
@@ -67,17 +67,16 @@ def initialize_data():
 # 한국은행경제통계시스템에서 달러/원 환율 가져오기
 def korea_bank(path, filename, dollar_rate, date):
     try:
-        url_head = "http://ecos.bok.or.kr/api/StatisticSearch"
-        exchange_rate_code = "731Y001"
-        formatted_date = format_date(date, '%Y-%m-%d', '%Y%m%d')
-        url_tail = f"{KOREA_BANK_API_KEY}/json/kr/1/10/{exchange_rate_code}/D/{formatted_date}/{formatted_date}"
-        data = fetch_data(f"{url_head}/{url_tail}").json()
-        rdata = data['StatisticSearch']["row"]
+        url_head = "http://ecos.bok.or.kr/api/KeyStatisticList"
+        url = f"{url_head}/{KOREA_BANK_API_KEY}/json/kr/1/100"
+        data = fetch_data(url).json()
+        rdata = data['KeyStatisticList']["row"]
+        print(rdata)
         dollar_rate['환율'] = rdata[18]['DATA_VALUE']
-        dollar_rate['일자'] = format_date(rdata[18]['TIME'], "%Y%m%d", "%Y-%m-%d")
+        dollar_rate['일자'] = date
         dollar_rate['금리'] = rdata[0]['DATA_VALUE']
-        dollar_rate['KORIBO'] = rdata[2]['DATA_VALUE']
-        print(f"한국은행 Open API로 환율 데이터 가져오기 완료, 날짜: {dollar_rate['일자']}")
+        dollar_rate['KORIBOR'] = rdata[2]['DATA_VALUE']
+        print(f"한국은행 Open API로 환율 데이터 가져오기 완료, 날짜: {date}")
         append_row_to_csv(path, filename, dollar_rate)
     except Exception as e:
         print(f"한국은행 데이터 가져오기 중 에러 발생: {e}")
