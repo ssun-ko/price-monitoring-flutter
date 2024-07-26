@@ -71,7 +71,6 @@ def korea_bank(path, filename, dollar_rate, date):
         url = f"{url_head}/{KOREA_BANK_API_KEY}/json/kr/1/100"
         data = fetch_data(url).json()
         rdata = data['KeyStatisticList']["row"]
-        print(rdata)
         dollar_rate['환율'] = rdata[18]['DATA_VALUE']
         dollar_rate['일자'] = date
         dollar_rate['금리'] = rdata[0]['DATA_VALUE']
