@@ -20,7 +20,7 @@ class OilScreen extends StatefulWidget {
 }
 
 class _OilScreenState extends State<OilScreen> {
-  DateTime _startDate = DateTime(DateTime.now().year, DateTime.now().month, 1);
+  DateTime _startDate = DateTime.now().subtract(Duration(days: 30));
   DateTime _endDate = DateTime.now();
 
   List<List<dynamic>> data = [];
