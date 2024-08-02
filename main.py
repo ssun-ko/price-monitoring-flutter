@@ -97,26 +97,26 @@ def lme_price(path, filename, prices):
 
 
 # 오피넷 데이터 가져오기
-def opinet_oil(path, filename, prices):
+def opinet_oil(path, filename, prices, date):
     try:
         base_url = "http://www.opinet.co.kr/api/"
-        # 유가 정보 날짜 가져오기
-        url = f"{base_url}avgAllPrice.do"
-        params = {"out": "json", "code": OPINET_API_KEY}
-        oil_data = fetch_data(url, params).json()['RESULT']['OIL']
-        prices['일자'] = format_date(oil_data[0]['TRADE_DT'], "%Y%m%d", "%Y-%m-%d")
+        prices['일자'] = date
         # 전국 지역별 유가 정보 가져오기
         url = f"{base_url}avgSidoPrice.do"
-        params.update({"prodcd": "D047"})
+        params = {"out": "json", "code": OPINET_API_KEY, "prodcd": "D047"}
         oil_datas = fetch_data(url, params).json()['RESULT']['OIL']
-        for oil_data in oil_datas:
-            sido = oil_data['SIDONM']
-            if sido in prices:
-                prices[sido] = oil_data['PRICE']
-            else:
-                print(f"입력되지 않은 지역 {sido}이 있습니다")
-        print(f"Opinet API로 유가 데이터 가져오기 완료, 날짜: {prices['일자']}")
-        append_row_to_csv(path, filename, prices)
+        if len(oil_datas) > 1:    
+            for oil_data in oil_datas:
+                sido = oil_data['SIDONM']
+                if sido in prices:
+                    prices[sido] = oil_data['PRICE']
+                else:
+                    print(f"입력되지 않은 지역 {sido}이 있습니다")
+            print(f"Opinet API로 유가 데이터 가져오기 완료, 날짜: {prices['일자']}")
+            append_row_to_csv(path, filename, prices)
+        else:
+            print("불러온 유가 정보가 단일 항목입니다.")
+            opinet_oil(path, filename, prices, date)
     except Exception as e:
         print(f"Opinet 데이터 가져오기 중 에러 발생: {e}")
 
@@ -213,6 +213,7 @@ def git_commit_and_push(repo_path, commit_message):
     except Exception as e:
         print(f"Git 작업 중 에러 발생: {e}")
 
+
 # 메인 함수
 def main():
     # 데이터 파일 경로 및 파일명 지정
@@ -239,7 +240,7 @@ def main():
     if date_today_duplicate_check(write_file_path, dollar_won_rate_filename, formatted_today):
         korea_bank(write_file_path, dollar_won_rate_filename, data['dollar_won_rate'], formatted_today)
     if date_today_duplicate_check(write_file_path, oil_price_filename, formatted_today):
-        opinet_oil(write_file_path, oil_price_filename, data['oil_price'])
+        opinet_oil(write_file_path, oil_price_filename, data['oil_price'], formatted_today)
     if date_today_duplicate_check(write_file_path, no_metal_filename, formatted_previous_business_day):
         lme_price(write_file_path, no_metal_filename, data['no_metal_prices'])
 
