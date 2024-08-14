@@ -241,8 +241,8 @@ def main():
         korea_bank(write_file_path, dollar_won_rate_filename, data['dollar_won_rate'], formatted_today)
     if date_today_duplicate_check(write_file_path, oil_price_filename, formatted_today):
         opinet_oil(write_file_path, oil_price_filename, data['oil_price'], formatted_today)
-    # if date_today_duplicate_check(write_file_path, no_metal_filename, formatted_previous_business_day):
-    #     lme_price(write_file_path, no_metal_filename, data['no_metal_prices'])
+    if date_today_duplicate_check(write_file_path, no_metal_filename, formatted_previous_business_day):
+        lme_price(write_file_path, no_metal_filename, data['no_metal_prices'])
 
     public_data_center(data['metal_price'])
     write_to_csv_file_metal(write_file_path, metal_price_filename, data['metal_price'][::-1])
