@@ -89,7 +89,7 @@ class DollarWidget extends StatelessWidget {
     startIndex = startIndex < 1 ? 1 : startIndex;
 
     for (int i = startIndex; i < data.length; i++) {
-      String x = data[i][0].toString();
+      String x = data[i][0].toString().substring(5);
       Map<String, double> y = {};
 
       y[data[0][1]] = double.tryParse(data[i][1].toString()) ?? 0.0;
