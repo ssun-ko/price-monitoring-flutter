@@ -5,13 +5,16 @@ class SearchUtil {
       DateTime startDate, DateTime endDate, bool isMonthly) {
     List<List<dynamic>> filteredData = [];
     DateFormat format =
-        isMonthly ? DateFormat('yyyy-MM') : DateFormat('yyyy-MM-dd');
+    isMonthly ? DateFormat('yyyy-MM') : DateFormat('yyyy-MM-dd');
+
+    DateTime startOfDay = DateTime(startDate.year, startDate.month, startDate.day, 0, 0, 0);
+    DateTime endOfDay = DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59);
 
     filteredData = data.where((row) {
       if (row == data[0]) return true;
       DateTime date = format.parse(row[0]);
-      return (date.isAfter(startDate) || date.isAtSameMomentAs(startDate)) &&
-          (date.isBefore(endDate) || date.isAtSameMomentAs(endDate));
+      return (date.isAfter(startOfDay) || date.isAtSameMomentAs(startOfDay)) &&
+          (date.isBefore(endOfDay) || date.isAtSameMomentAs(endOfDay));
     }).toList();
 
     return filteredData;
