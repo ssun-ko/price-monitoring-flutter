@@ -86,7 +86,9 @@ class DollarWidget extends StatelessWidget {
 
     // 최근 30일 데이터 조회, 데이터 30일 미만인 경우 전체
     int startIndex = data.length - 30;
-    startIndex = startIndex < 0 ? 1 : startIndex;
+    startIndex = startIndex < 1 ? 1 : startIndex;
+
+    print(startIndex);
 
     for (int i = startIndex; i < data.length; i++) {
       String x = data[i][0].toString();
