@@ -51,6 +51,27 @@ class DetailWidget extends StatelessWidget {
             DetailCard(cardNumber: 4)
           ]),
         );
+      } else if (Responsive.isTablet(context)) {
+        return Container(
+            child: Column(children: [
+              Row(
+                children: [
+                  DollarCard(cardNumber: 1),
+                  SizedBox(width: defaultPadding),
+                  DollarCard(cardNumber: 2),
+                  SizedBox(width: defaultPadding),
+                  DetailCard(cardNumber: 1),
+                ],
+              ),
+              SizedBox(height: defaultPadding),
+              Row(children: [
+                DetailCard(cardNumber: 2),
+                SizedBox(width: defaultPadding),
+                DetailCard(cardNumber: 3),
+                SizedBox(width: defaultPadding),
+                DetailCard(cardNumber: 4)
+              ])
+            ]));
       } else {
         return Container(
             height: 1000,
