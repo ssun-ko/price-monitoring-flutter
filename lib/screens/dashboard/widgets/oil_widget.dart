@@ -104,7 +104,7 @@ class _OilWidgetState extends State<OilWidget> {
                   child: SfMaps(layers: [
                     MapShapeLayer(
                         source: MapShapeSource.asset(
-                            'map/korea-provinces-2018-geo.json',
+                            'map/skorea_provinces_geo.json',
                             shapeDataField: 'name_eng',
                             dataCount: data.length,
                             primaryValueMapper: (int index) => data[index].name,
