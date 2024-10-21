@@ -3,7 +3,6 @@ import 'package:price/core/constants/color_constants.dart';
 import 'package:price/core/constants/string_constants.dart';
 import 'package:price/models/chart_data_model.dart';
 import 'package:price/providers/data_provider.dart';
-import 'package:price/responsive.dart';
 import 'package:price/screens/dashboard/components/widget_title.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

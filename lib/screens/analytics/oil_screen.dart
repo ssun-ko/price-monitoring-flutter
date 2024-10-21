@@ -133,7 +133,7 @@ class _OilScreenState extends State<OilScreen> {
                 DownloadSnackBar.showSnackBar(context);
               }),
               SizedBox(height: defaultPadding),
-              if(Responsive.isDesktop(context)) DataTableSection(filteredData: filteredData)
+              DataTableSection(filteredData: filteredData)
             ],
           ),
         ),

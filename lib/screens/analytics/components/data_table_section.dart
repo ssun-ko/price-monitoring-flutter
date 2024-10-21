@@ -8,36 +8,46 @@ class DataTableSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: DataTable(
-              columnSpacing: 20,
-              columns: _buildColumns(),
-              rows: _buildRows(),
+    ScrollController scrollController = ScrollController();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          padding: EdgeInsets.all(defaultPadding),
+          decoration: BoxDecoration(
+            color: secondaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Scrollbar(
+            thumbVisibility: true,
+            controller: scrollController,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: scrollController,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth - (defaultPadding*2)
+                ),
+                child: DataTable(
+                  columnSpacing: 20,
+                  columns: _buildColumns(),
+                  rows: _buildRows(),
+                ),
+              ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   List<DataColumn> _buildColumns() {
     return filteredData[0].map((column) {
       return DataColumn(
-        label: Expanded(
-          child: Text(
-            column.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
+          label: Text(
+        column.toString(),
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ));
     }).toList();
   }
 
