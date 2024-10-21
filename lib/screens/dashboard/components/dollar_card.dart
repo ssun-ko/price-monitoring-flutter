@@ -51,8 +51,8 @@ class DollarCard extends StatelessWidget {
                   SizedBox(height: defaultPadding / 3),
                   Row(
                     children: [
-                      Text(DateTime.now().month.toString() + "월 평균 "),
-                      Text(_getAverage(dataProvider))
+                      Text(DateTime.now().month.toString() + "월 평균 ", style: Theme.of(context).textTheme.labelSmall),
+                      Text(_getAverage(dataProvider), style: Theme.of(context).textTheme.labelSmall)
                     ],
                   ),
                   Spacer(),
