@@ -6,7 +6,6 @@ import 'package:price/core/utils/csv_util.dart';
 import 'package:price/core/utils/search_util.dart';
 import 'package:price/providers/data_provider.dart';
 import 'package:price/providers/menu_provider.dart';
-import 'package:price/responsive.dart';
 import 'package:price/screens/analytics/components/chart_section.dart';
 import 'package:price/screens/analytics/components/data_table_section.dart';
 import 'package:price/screens/analytics/components/download_snackbar.dart';
