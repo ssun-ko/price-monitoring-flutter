@@ -1,6 +1,6 @@
 # ⭐ Price Monitoring System
 
-![alt text](/web/screenshot2.png)
+![alt text](/web/screenshot.png)
 
 This project offers a solution tailored to monitor and analyze price fluctuations of raw materials used in construction projects.
 Given the significant impact of raw material price changes on the construction industry, providing precise and timely price information is paramount for effective project cost management and budgeting.
