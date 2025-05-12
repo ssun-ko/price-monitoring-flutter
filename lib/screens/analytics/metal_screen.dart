@@ -124,7 +124,7 @@ class _MetalScreenState extends State<MetalScreen> {
                   data: filteredData,
                   menuId: context.watch<MenuProvider>().menu),
               SizedBox(height: defaultPadding),
-              Text("🥰🥰 철강 가격의 다음 업데이트 예정일은 2025년 3월 23일입니다."),
+              Text("철강 가격의 다음 업데이트 예정일은 2025년 9월 17일입니다."),
               SizedBox(height: defaultPadding),
               ExcelDownloadButton(onPressed: () {
                 CSVUtil.downloadCSV(data, fileName);
