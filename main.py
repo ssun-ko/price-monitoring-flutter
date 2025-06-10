@@ -9,10 +9,10 @@ from bs4 import BeautifulSoup
 
 # 환경 변수에서 API 키 가져오기
 KOREA_BANK_API_KEY = os.getenv("KOREA_BANK_API_KEY")
-LME_PRICE_URL = os.getenv("LME_PRICE_URL")
 OPINET_API_KEY = os.getenv("OPINET_API_KEY")
 PUBLIC_DATA_CENTER_API_KEY = os.getenv("PUBLIC_DATA_CENTER_API_KEY")
-
+LME_PRICE_BOARD_URL = os.getenv("LME_PRICE_BOARD_URL")
+LME_PRICE_LIST_URL = os.getenv("LME_PRICE_LIST_URL")
 
 # 중복이 아니면 True, 중복값이면 False 반환
 def date_today_duplicate_check(file_path, file_name, today_date):
@@ -81,20 +81,46 @@ def korea_bank(path, filename, dollar_rate, date):
         print(f"한국은행 데이터 가져오기 중 에러 발생: {e}")
 
 
-# LME 데이터 가져오기
+
+# 조달 데이터 가져오기
 def lme_price(path, filename, prices):
     try:
-        html = fetch_data(LME_PRICE_URL).text
-        soup = BeautifulSoup(html, 'html.parser')
-        td_elements = soup.find('div', class_="sub_page").find_all('td')
-        prices['일자'] = td_elements[0].text.replace(". ", "-")
-        for metal, idx in zip(['구리', '알루미늄', '아연', '납', '니켈', '주석'], range(1, 7)):
-            prices[metal] = float(td_elements[idx].text.replace(",", ""))
-        print(f"LME 비철금속 데이터 가져오기 완료, 날짜: {prices['일자']}")
-        append_row_to_csv(path, filename, prices)
+        html = fetch_data(f"{LME_PRICE_BOARD_URL}?key=00823").text
+        soup = BeautifulSoup(html, "html.parser")
+        today = datetime.now().strftime("%Y-%m-%d")
+        date_check = 0
+        soup_div = soup.find("div", "board_list").find("tbody")
+        date_check_list = soup_div.find_all("tr")
+        for i in date_check_list:
+            if today == i.find_all("td")[4].get_text(strip=True):
+                date_check += 1
+        links = soup.find_all("a", onclick=re.compile(r"goView\("))[:date_check]
+        for link in links:
+            bbsSn = re.search(r"goView\('(\d+)',\s*'(\d+)'\)", link["onclick"]).group(1)
+            LME_DETAIL_PRICE_URL = f"{LME_PRICE_LIST_URL}?bbsSn={bbsSn}&key=00823"
+            html = fetch_data(LME_DETAIL_PRICE_URL).text
+            soup = BeautifulSoup(html, "html.parser")
+            # 1. 날짜 자동 추출 (두 번째 행의 <th>들 중 마지막 날짜)
+            thead = soup.select_one("table.tstyle_a thead")
+            date_ths = thead.select("tr")[1].find_all("th")
+            prices["일자"] = (
+                date_ths[5].get_text(strip=True).split()[0]
+            )  # '2025-06-09' 추출
+
+            # 2. 가격 추출
+            rows = soup.select("table.tstyle_a tbody tr")
+            for i in range(0, len(rows), 2):  # CASH는 짝수 행
+                row = rows[i]
+                th = row.find("th")
+                tds = row.find_all("td")
+                if len(tds) >= 6 and tds[0].get_text(strip=True) == "CASH":
+                    metal = th.get_text(strip=True)
+                    price = tds[5].get_text(strip=True).replace(",", "")
+                    prices[metal] = price
+            print(f"LME 비철금속 데이터 가져오기 완료, 날짜: {prices['일자']}")
+            append_row_to_csv(path, filename, prices)
     except Exception as e:
         print(f"LME 데이터 가져오기 중 에러 발생: {e}")
-
 
 # 오피넷 데이터 가져오기
 def opinet_oil(path, filename, prices, date):
@@ -224,8 +250,6 @@ def main():
     oil_price_filename = "daily_oil_data.csv"
     metal_price_filename = "monthly_metal_data.csv"
 
-    # Git 저장소 최신화
-    # git_pull(repo_path)
 
     # 현재 날짜 및 이전 영업일 계산
     today = datetime.today()
@@ -241,8 +265,8 @@ def main():
         korea_bank(write_file_path, dollar_won_rate_filename, data['dollar_won_rate'], formatted_today)
     if date_today_duplicate_check(write_file_path, oil_price_filename, formatted_today):
         opinet_oil(write_file_path, oil_price_filename, data['oil_price'], formatted_today)
-    # if date_today_duplicate_check(write_file_path, no_metal_filename, formatted_previous_business_day):
-    #     lme_price(write_file_path, no_metal_filename, data['no_metal_prices'])
+    if date_today_duplicate_check(write_file_path, no_metal_filename, formatted_previous_business_day):
+        lme_price(write_file_path, no_metal_filename, data['no_metal_prices'])
 
     public_data_center(data['metal_price'])
     write_to_csv_file_metal(write_file_path, metal_price_filename, data['metal_price'][::-1])
