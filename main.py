@@ -6,6 +6,7 @@ import requests
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+import re
 
 # 환경 변수에서 API 키 가져오기
 KOREA_BANK_API_KEY = os.getenv("KOREA_BANK_API_KEY")
